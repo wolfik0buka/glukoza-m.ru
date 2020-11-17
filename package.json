@@ -4,7 +4,10 @@
     "version": "1.0.0",
     "author": "opmyukka <opmyukka@gmail.com>",
     "private": true,
-    "scripts": {},
+    "scripts": {
+        "b_admin" : "vue build --dest js/admin ./srcAdmin/adminEntry.js", 
+        "b_public": "vue build --dest js/public ./srcVUE/vue.js"
+    },
     "dependencies": {
         "@babel/plugin-proposal-class-properties": "^7.4.0",
         "@babel/runtime": "^7.3.1",

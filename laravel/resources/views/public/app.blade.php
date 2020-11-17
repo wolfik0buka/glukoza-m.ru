@@ -118,10 +118,10 @@
         </script>
 
         {{--CSS--}}
-        <link rel="stylesheet" href="/js/public/chunk-vendors.css">
+        <link rel="stylesheet" href="/js/public/css/chunk-vendors.css">
         <link rel="stylesheet" href="/css/datepicker.min.css">
         <link rel="stylesheet" href="/js/vendor/magnific-popup_1.0.0.min.css">
-        <link rel="stylesheet" href="/js/public/app.css">
+        <link rel="stylesheet" href="/js/public/css/app.css">
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,400i,500,700&amp;subset=cyrillic">
 
         {{--JS--}}
@@ -332,7 +332,7 @@
         </script>
 
         <script src="/js/vendor/magnific-popup_1.0.0.min.js"></script>
-        <script src="/js/public/chunk-vendors.js"></script>
-        <script src="/js/public/app.js"></script>
+        <script src="/js/public/js/chunk-vendors.js"></script>
+        <script src="/js/public/js/app.js"></script>
     </body>
 </html>

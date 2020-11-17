@@ -57,8 +57,8 @@ App.urlParams = () => {
 window._ = require("lodash");
 
 
-const moment = require('../vue/components/libs/moment/moment');
-require('../vue/components/libs/moment/locale/ru.js');
+const moment = require('../srcVUE/components/libs/moment/moment');
+require('../srcVUE/components/libs/moment/locale/ru.js');
 moment.locale('ru');
 moment().format();
 window.moment = moment;
@@ -87,7 +87,7 @@ if (!Array.prototype.find) {
 }
 
 
-window.Mess = require("../vue/components/libs/mess");
+window.Mess = require("../srcVUE/components/libs/mess");
 Mess.init();
 
 window.VueScript2 = require("vue-script2/dist/vue-script2.min");
@@ -230,10 +230,10 @@ import('./adminVendor.js').then(function(vendor) {
     };
     Vue.filter("currency", formatCurrency);
 
-    Vue.directive("onClickaway", require("../vue/components/clickAway").default);
-    Vue.component("numberSpin", require("../vue/components/numberSpin.vue").default);
-    Vue.component("priceEditor", require("../vue/components/priceEditor.vue").default);
-    Vue.component("textEditor", require("../vue/components/textEditor.vue").default);
+    Vue.directive("onClickaway", require("../srcVUE/components/clickAway").default);
+    Vue.component("numberSpin", require("../srcVUE/components/numberSpin.vue").default);
+    Vue.component("priceEditor", require("../srcVUE/components/priceEditor.vue").default);
+    Vue.component("textEditor", require("../srcVUE/components/textEditor.vue").default);
     Vue.component("order", require("./order/Order.vue").default);
     Vue.component("point-selector", require("./order/PointSelector.vue").default);
     Vue.component("page-sklad", require("./sklad/pageSklad.vue").default);
@@ -244,7 +244,7 @@ import('./adminVendor.js').then(function(vendor) {
     Vue.component("products", require("./products/Products.vue").default);
     Vue.component("single-upload", require("./singleUpload.vue").default);
     Vue.component("control-select", require("./selectControl.vue").default);
-    Vue.component("modal", require("../vue/components/Modal.vue").default);
+    Vue.component("modal", require("../srcVUE/components/Modal.vue").default);
 
 
     App.instance = new Vue({
