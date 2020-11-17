@@ -1,0 +1,12 @@
+Options -Indexes
+php_value display_errors on
+
+Options +FollowSymLinks
+RewriteEngine On
+
+#RewriteCond %{HTTP_HOST} ^www.glukoza-med.ru
+#RewriteRule ^(.*)$ https://glukoza-med.ru/$1 [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L]

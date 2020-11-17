@@ -1,0 +1,25 @@
+.page404{
+    &__cats{
+        display: flex;
+        flex-wrap: wrap;
+        .card{
+            box-shadow: none;
+            border:1px solid #ecebeb;
+            margin-left: -1px;
+            margin-top: -1px;
+            padding: 20px;
+        }
+    }
+    &__childCats{
+        overflow: hidden;
+        &__item{
+            display: block;
+            padding: 2px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 14px;
+        }
+    }
+}
+

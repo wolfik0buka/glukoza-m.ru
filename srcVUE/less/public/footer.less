@@ -1,0 +1,52 @@
+.footer {
+    background: #444;
+    padding: 20px 0 15px;
+    color: #b7b7b7;
+    font-size: 14px;
+    font-family: 'Arial', sans-serif;
+    a{
+        color: #b7b7b7;
+    }
+    &__cards{
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        margin-top: 15px;
+        border-top: 1px solid #595858;
+        img{
+            height: 36px;
+            @media @xs{
+                height: auto;
+            }
+        }
+    }
+    &__title {
+        color: white;
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: .7px;
+        padding-bottom: 3px;
+        padding-top: 10px;
+    }
+    &__links {
+        a {
+            display: block;
+            color: rgba(255,255,255,.7);
+            @include break(hover) {
+                text-decoration: underline;
+                color: rgba(255,255,255,1);
+            }
+        }
+    }
+    p{
+        margin: 0 0 5px;
+        &.company {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+        }
+    }
+
+}

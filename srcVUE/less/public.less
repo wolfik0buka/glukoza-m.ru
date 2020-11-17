@@ -1,0 +1,288 @@
+@import "./bootstrap/bootstrap";
+@import "./public/variables";
+@import "helpers";
+
+#app {
+    min-height: 800px;
+}
+
+html {
+    height: 100%;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: none;
+    -ms-touch-action: none;
+    touch-action: none;
+    -webkit-font-feature-settings: "liga" 0;
+    font-feature-settings: "liga" 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-size: 14px;
+    background: @color-bg-gray;
+    @media @sm{
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+    }
+}
+
+body {
+    text-rendering: optimizeLegibility;
+    color: @color-text-default;
+    .font-regular;
+    font-size: 14px;
+    font-weight: 400;
+    background: #ececec;
+    min-width: 320px;
+}
+
+a, &.link {
+    color: #3195d0;
+    cursor: pointer;
+    &:hover {
+        color: @red;
+    }
+}
+
+strong, b {
+    font-weight: 500;
+}
+
+img {
+    max-width: 100%;
+}
+
+.white-bg{
+    background-color: white;
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+.centerText{
+    text-align: center;
+}
+
+.card {
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    background: white;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    .card-block {
+        padding: 15px;
+    }
+    &__title{
+        font-size: 17px;
+        font-weight: 500;
+    }
+    &__content {
+        padding: 20px;
+    }
+    &__list {
+        overflow: hidden;
+        &Item{
+            padding: 10px 20px;
+            border-top: 1px solid #f4f4f4;
+            border-bottom: 1px solid #f4f4f4;
+            margin-top: -1px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            &-text{
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    }
+}
+
+.form{
+    &-group{
+        label{
+            font-weight: normal;
+            color: @color-text-muted;
+        }
+    }
+    &-control{
+        font-size: 14px;
+        box-shadow: none;
+        border: 1px solid #dedede;
+        border-radius: 2px;
+        padding: 5px 12px 4px;
+    }
+}
+
+
+.child_cats {
+    background: white;
+    padding: 15px 15px 0;
+    .row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+        @media @xs{
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .item {
+            padding-bottom: 15px;
+            a {
+                font-size: 16px;
+                font-weight: 500;
+                display: block;
+            }
+            p {
+                margin: 0;
+                font-size: 13px;
+            }
+        }
+    }
+}
+
+.page_head {
+    position: relative;
+    border-bottom: 1px solid #e6e6e6
+}
+
+.panel {
+    background: white;
+    border: 1px solid #f3f3f3;
+    box-shadow: none !important;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.dd-menu {
+    margin: 10px 0 0;
+    padding: 10px 15px;
+    background: white;
+    box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.3);
+    border: 0;
+    border-radius: 0;
+    color: #444;
+    .dropdown_title {
+        color: #444;
+        font-size: 16px;
+        white-space: nowrap;
+    }
+    a {
+        display: block;
+        white-space: nowrap;
+        color: #333;
+        padding: 0;
+        font-size: 1rem;
+        line-height: 2rem;
+        &:hover {
+            background: white;
+            color: @red;
+        }
+    }
+}
+
+
+div.basket {
+    .spinner_wrapper{
+        width: 150px;
+        display: inline-block;
+        vertical-align: top;
+        .bootstrap-touchspin {
+            height: 36px;
+            .bootstrap-touchspin-down,
+            .bootstrap-touchspin-up {
+                height: 36px;
+            }
+            input.spiner {
+                height: 36px;
+            }
+        }
+    }
+    table.basket {
+        tbody {
+            td {
+                vertical-align: middle;
+
+
+            }
+        }
+    }
+}
+
+.breadcrumbs_path {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    .item {
+        padding: 8px 15px;
+        width: 100%;
+        color: #888;
+        background-color: #fff;
+        position: relative;
+        font-size: 13px;
+        @media @md{
+            display: none;
+        }
+        &.active {
+            color: #444;
+            @media @md{
+                display: block;
+            }
+        }
+    }
+}
+
+.dop_fld {
+    input#date_of_delivery {
+        cursor: pointer;
+    }
+    select#time_intervals {
+        width: 100%;
+    }
+    .form-inline {
+        padding-bottom: 10px;
+    }
+}
+
+.list-group{
+    .list-group-item{
+        border: 1px solid @color-border;
+    }
+}
+
+label{
+    width: 100%;
+}
+.label{
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 10px;
+    padding: 3px 7px;
+    display: inline-flex;
+    &-default {
+        background-color: #8a919c;
+    }
+}
+
+@import "public/header";
+@import "public/_typography";
+@import "public/_buttons";
+@import "public/_magnific-popup";
+@import "public/breadcrumbs";
+@import "public/products";
+@import "public/beznal";
+@import "public/page_product";
+@import "public/page_main";
+@import "public/page_contacts";
+@import "public/page_404";
+@import "public/page_track";
+@import "public/pageProfileOrdersHistory";
+@import "public/pageBasket";
+@import "public/pagePaymentSuccessAndFail";
+@import "public/pagePayment";
+@import "public/cat_sidebar";
+@import "public/services_sidebar";
+@import "public/footer";
+@import "public/font_awesome";

@@ -1,0 +1,84 @@
+.page_product__card{
+    padding: 15px 15px 50px;
+}
+
+.page_product__pics{
+    text-align: center;
+    margin: 0;
+}
+
+.page_product__buyBlock{
+    border: 1px solid #e6e6e6;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    .price{
+        font-size: 16px;
+        strong{
+            font-size: 20px;
+            font-weight: 700;
+        }
+    }
+    .productDelivery{
+        font-family: @arial;
+        margin-top: 20px;
+        &__link{
+            padding: 6px 0 0;
+            display: block;
+            font-size: 15px;
+            line-height: 110%;
+        }
+
+    }
+
+}
+
+.page_product__availableStatus{
+    font-family: @arial;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.page_product__description{
+    overflow: hidden;
+    padding: 15px 0;
+    border-top: 1px solid #f3f3f3;
+    ._title{
+        float:left;
+        width:30%;
+    }
+    ._content{
+        float:left;
+        width:70%;
+        p{
+            &:last-of-type{
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+
+.deliveryTable{
+    margin: 0 0;
+    width: 100%;
+    border: 1px solid #f3f3f3;
+    tr {
+        td {
+            font-family: "Arial", sans-serif;
+            border: 0;
+            vertical-align: top;
+            padding: 12px 15px;
+            font-size: 15px;
+            border-top: 1px solid #f3f3f3;
+            background-color: #fafafa;
+            &:nth-child(2) {
+                max-width: 40%;
+                text-align: right;
+                white-space: nowrap;
+            }
+        }
+        &:hover{
+            background-color: #fff;
+        }
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "require": {
+        "duncan3dc/blade": "2.1.6",
+        "mpdf/mpdf": "^6.0"
+    }
+}

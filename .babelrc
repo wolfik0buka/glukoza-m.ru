@@ -1,0 +1,45 @@
+{
+    "presets": [
+        ["vue"],
+        [
+            "@babel/preset-env",
+            {
+                "useBuiltIns": 'entry',
+                "modules": false,
+                "include": [],
+                "exclude": []
+            }
+        ]
+    ],
+    "plugins": [
+        [
+            "@babel/plugin-transform-runtime",
+            {
+                "corejs": false,
+                "helpers": false,
+                "regenerator": true,
+                "useESModules": true
+            }
+        ],
+        [
+            "@babel/plugin-proposal-class-properties"
+        ],
+        [
+            "lodash"
+        ],
+        [
+            "module-resolver",
+
+            {
+                "root": "./",
+                "alias": {
+                    "vue": "./node_modules/vue/dist/vue.min.js",
+                    "vue.runtime.esm": "./node_modules/vue/dist/vue.min.js",
+                    "vuex": "./node_modules/vuex/dist/vuex.min.js",
+                    "vue-router": "./node_modules/vue-router/dist/vue-router.min.js",
+                    "noty": "./node_modules/noty/lib/noty.js"
+                }
+            }
+        ]
+    ]
+}

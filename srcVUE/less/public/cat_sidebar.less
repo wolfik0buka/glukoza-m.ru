@@ -1,0 +1,79 @@
+.cat_sidebar{
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    @media @xs{
+        margin-top: 30px;
+    }
+    .title{
+        border-bottom: 1px solid #e6e6e6;
+        padding: 10px 15px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #444;
+        .btn-group{
+            .btn.dropdown-toggle{
+                background: transparent;
+                text-align: left;
+                padding: 10px 15px;
+                font-size: 14px;
+                font-weight: 500;
+                position: relative;
+                transition: .3s all ease;
+                span.caret{
+                    position: absolute;
+                    top: 50%;
+                    right: 15px;
+                    border-top: 6px solid;
+                    border-right: 6px solid transparent;
+                    border-left: 6px solid transparent;
+                    margin: -3px 0 0;
+                }
+                &:hover{
+                    box-shadow: none;
+                    color: @red;
+                    span.caret{
+                        color: @red;
+                    }
+                }
+            }
+            .dropdown-menu{
+                .dd-menu;
+                margin-top: 0;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+                min-width: 100%;
+            }
+            &.open{
+                .btn.dropdown-toggle{
+                    box-shadow: none;
+                    background: @green;
+                    color: #fff;
+                    border-radius: 0;
+                    span.caret{
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+    .list-group{
+        margin: 10px 0;
+        .list-group-item{
+            border: 0;
+            border-radius: 0;
+            padding: 7px 15px;
+            font-weight: 400;
+            font-size: 14px;
+            color: #444;
+            line-height: 125%;
+            &.active{
+                color: @red;
+                background: #fff;
+            }
+            &:hover{
+                cursor: pointer;
+                color: @red;
+                background: transparent;
+            }
+        }
+    }
+}
