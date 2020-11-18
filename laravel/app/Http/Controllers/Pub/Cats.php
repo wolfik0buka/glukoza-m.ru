@@ -52,8 +52,7 @@ class Cats extends Controller
             $cat = Category::with(
                 'parentCat',
                 'childs.products.linksToCats',
-                'products.tovar_1c_att',
-                'products.productProperties.name_property'
+                'products.tovar_1c_att'
             )
                 ->where('slug', $slug)
                 ->firstOrFail();
@@ -74,41 +73,6 @@ class Cats extends Controller
                 return $product;
             })
             ->sortBy('sort');
-        
-        if (isset($_GET['is_filter']) and $_GET['is_filter'] == 'true') {
-
-            $filter_props = $_GET;
-            $filter_props = array_filter($filter_props, function ($value, $slug) {
-                if (strpos($slug, 'f_') !== false or $slug ==='price') {
-                    
-                    return true;
-                }
-                return false;
-            }, ARRAY_FILTER_USE_BOTH);
-            /*
-            * Выбираем только свойства, по которым сортируем товары
-             */
-            if ($filter_props) {
-                $temp_props = array();
-                foreach ($filter_props as $slug => $value) {
-                    if ($slug === 'price') {
-                        $temp_props['price'] = $value;
-                    } else {
-                        $new_slug = explode('f_', $slug)[1];
-                        foreach ($value as $prop_slug => $status) {
-                            if ($status === 'true') {
-                                $temp_props[$new_slug][] = $prop_slug;
-                            }
-                        }
-                    }
-                }
-                $filter_props = $temp_props;
-                unset($temp_props);
-            }
-
-
-    
-        }
 
         $cat->childs = $cat->childs->filter(function ($cat) {
             return $cat->products->count()  > 0 ? true : false;
@@ -116,6 +80,8 @@ class Cats extends Controller
         // Сео костыли:
         // Для определенной категории выводим дополнительный список ссылок
         // Перед товарами.
+
+        //Cats::hello();
         
         if ($cat->id === 2) {
             $cat->childs = $cat->childs->map(function ($cat) {
@@ -138,10 +104,12 @@ class Cats extends Controller
                 return $cat;
             });
         }
+
         $filter = array(
             'is_filter' => false,
             'props' => array(),
         );
+
         if($cat->products->count() > 0){
             $filter_properties = array();
             $filter_properties['price'] =array(
@@ -184,6 +152,75 @@ class Cats extends Controller
             }
         }
 
+        if (isset($_GET['is_filter']) and $_GET['is_filter'] == 'true') {
+
+            $filter_props = $_GET;
+
+            $filter_props = array_filter($filter_props, function ($value, $slug) {
+                if (strpos($slug, 'f_') !== false or $slug ==='price') {
+                    
+                    return true;
+                }
+                return false;
+            }, ARRAY_FILTER_USE_BOTH);
+            /*
+            * Выбираем только свойства, по которым сортируем товары
+             */
+            if ($filter_props) {
+                $temp_props = array();
+                foreach ($filter_props as $slug => $value) {
+                    if ($slug === 'price') {
+                        $temp_props['price'] = $value;
+                    } else {
+                        $new_slug = explode('f_', $slug)[1];
+                        foreach ($value as $prop_slug => $status) {
+                            if ($status === 'true') {
+                                $temp_props[$new_slug][] = $prop_slug;
+                            }
+                        }
+                    }
+                }
+                $filter_props = $temp_props;
+                unset($temp_props);
+            }
+
+            $cat->products = $cat->products
+                ->filter(function($product) use ($filter_props) {
+                    $props = array();
+                    foreach ($product->productProperties as $property) {
+                        $props[$property->name_property->slug][] = $property->slug;
+                    }
+                    foreach ($filter_props as $prop_slug => $prop_values) {
+
+                        if ($prop_slug === 'price') {
+                            
+                            if (isset($product->tovar_1c_att->price)) {
+                                $cur_price = intval($product->tovar_1c_att->price);
+                                if (isset($prop_values['to']) and 
+                                intval($prop_values['to']) < $cur_price) {
+                                    return false;
+                                }
+                                if (isset($prop_values['from']) and 
+                                intval($prop_values['from']) > $cur_price) {
+                                    return false;
+                                }
+                            }else {
+                                return false;
+                            }
+                            
+                        } else {
+                            if (!in_array($prop_slug, array_keys($props))) {
+                                return false;
+                            }
+                            if (!array_intersect($props[$prop_slug], $prop_values)) {
+                                return false;
+                            }
+                        }
+                    }
+                    return true;
+                });   
+        }
+
 
         
 
@@ -194,5 +231,9 @@ class Cats extends Controller
             ->all();
 
         return view('public.cats.list_products', compact('cat', 'canonical', 'seo', 'filter'));
+    }
+
+    public static function hello(){
+        var_export('test');
     }
 }
