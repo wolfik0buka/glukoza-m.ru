@@ -26,11 +26,37 @@
             <div class="title">Фильтр</div>
             <form action="" method="GET">
                 <div class="filter">
-                    @foreach($filter['props'] as $prop)
-                        prop
-                        {{$prop['name']}}
-                        <div class="title">{{ $prop['name'] }}</div>
+                    <input 
+                        type="checkbox" 
+                        name="is_filter"
+                        value="true"
+                        checked
+                    >
+                    @foreach ($filter['props'] as $slug => $prop)
+                        <div class="title">{{$prop["name"]}}</div>
+                        <div class="filter_body">
+                            @if ($slug !== 'price')
+                                @foreach ($prop["items"] as $option_slug => $variant)
+                                    <label class="input-group">
+                                            <input 
+                                                type="checkbox" 
+                                                name="f_{{$slug}}[{{$option_slug}}]"
+                                                value="true"
+                                            >
+                                        {{$variant["value"]}} 
+                                        <span class="filter__total">({{$variant["count"]}})</span>
+                                    </label><!-- /input-group -->
+                                @endforeach
+                            @else
+                                <p>Здесь Цена</p>
+                            @endif
+
+                        </div>
                     @endforeach
+                </div>
+                <div class="buttons">
+                    <input type="submit" value="Показать" class="btn btn-primary">
+                    <input type="reset" value="Сбросить" class="btn btn-light">
                 </div>
             </form>
         </div>

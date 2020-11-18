@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\PropertyLinkCat;
+use App\Models\PropertyLinkValue;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Cats extends Controller
@@ -45,8 +46,15 @@ class Cats extends Controller
 
     public static function singleSlug($slug)
     {
+
+        
         try {
-            $cat = Category::with('parentCat', 'childs.products.linksToCats', 'products.tovar_1c_att', 'products.productProperties.name_property')
+            $cat = Category::with(
+                'parentCat',
+                'childs.products.linksToCats',
+                'products.tovar_1c_att',
+                'products.productProperties.name_property'
+            )
                 ->where('slug', $slug)
                 ->firstOrFail();
             $canonical = '/category/'.$cat->slug;
@@ -55,7 +63,7 @@ class Cats extends Controller
                 ->view('errors.404')
                 ->setStatusCode(404);
         }
-
+        
         // Сортируем по имени
         $cat->products = $cat->products
             ->map(function ($product) {
@@ -66,13 +74,49 @@ class Cats extends Controller
                 return $product;
             })
             ->sortBy('sort');
+        
+        if (isset($_GET['is_filter']) and $_GET['is_filter'] == 'true') {
 
-        // Сео костыли:
-        // Для определенной категории выводим дополнительный список ссылок
-        // Перед товарами.
+            $filter_props = $_GET;
+            $filter_props = array_filter($filter_props, function ($value, $slug) {
+                if (strpos($slug, 'f_') !== false or $slug ==='price') {
+                    
+                    return true;
+                }
+                return false;
+            }, ARRAY_FILTER_USE_BOTH);
+            /*
+            * Выбираем только свойства, по которым сортируем товары
+             */
+            if ($filter_props) {
+                $temp_props = array();
+                foreach ($filter_props as $slug => $value) {
+                    if ($slug === 'price') {
+                        $temp_props['price'] = $value;
+                    } else {
+                        $new_slug = explode('f_', $slug)[1];
+                        foreach ($value as $prop_slug => $status) {
+                            if ($status === 'true') {
+                                $temp_props[$new_slug][] = $prop_slug;
+                            }
+                        }
+                    }
+                }
+                $filter_props = $temp_props;
+                unset($temp_props);
+            }
+
+
+    
+        }
+
         $cat->childs = $cat->childs->filter(function ($cat) {
             return $cat->products->count()  > 0 ? true : false;
         });
+        // Сео костыли:
+        // Для определенной категории выводим дополнительный список ссылок
+        // Перед товарами.
+        
         if ($cat->id === 2) {
             $cat->childs = $cat->childs->map(function ($cat) {
                 $linksAnchors = [
@@ -100,13 +144,16 @@ class Cats extends Controller
         );
         if($cat->products->count() > 0){
             $filter_properties = array();
-            $filter_properties['price'] = array('min' => 99999, 'max' => 0);
+            $filter_properties['price'] =array(
+                'name' => 'Цена',
+                'items' => array('min' => 99999, 'max' => 0)
+            );
             foreach ($cat->products as $product) {
                 
                 if (isset($product->tovar_1c_att->price)) {
                     $temp_price = intval($product->tovar_1c_att->price);
-                    $filter_properties['price']['min'] = min($temp_price, $filter_properties['price']['min']);
-                    $filter_properties['price']['max'] = max($temp_price, $filter_properties['price']['max']);
+                    $filter_properties['price']['items']['min'] = min($temp_price, $filter_properties['price']['items']['min']);
+                    $filter_properties['price']['items']['max'] = max($temp_price, $filter_properties['price']['items']['max']);
                 }
                 
                 foreach ($product->productProperties as $product_property) {
