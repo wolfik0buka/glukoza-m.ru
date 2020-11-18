@@ -130,7 +130,11 @@ class Tovar extends Model
         return $query;
     }
 
-
+    public function productProperties()
+    {
+      return $this
+        ->belongsToMany('App\Models\PropertyLinkValue', 'property_link_tovar', 'id_tovar', 'id_value');
+    }
     public function relatedProducts()
     {
 

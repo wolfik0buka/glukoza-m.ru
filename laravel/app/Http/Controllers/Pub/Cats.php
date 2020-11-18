@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\PropertyLinkCat;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Cats extends Controller
@@ -45,7 +46,7 @@ class Cats extends Controller
     public static function singleSlug($slug)
     {
         try {
-            $cat = Category::with('parentCat', 'childs.products.linksToCats', 'products.tovar_1c_att')
+            $cat = Category::with('parentCat', 'childs.products.linksToCats', 'products.tovar_1c_att', 'products.productProperties.name_property')
                 ->where('slug', $slug)
                 ->firstOrFail();
             $canonical = '/category/'.$cat->slug;
@@ -69,8 +70,6 @@ class Cats extends Controller
         // Сео костыли:
         // Для определенной категории выводим дополнительный список ссылок
         // Перед товарами.
-
-
         $cat->childs = $cat->childs->filter(function ($cat) {
             return $cat->products->count()  > 0 ? true : false;
         });
@@ -95,6 +94,51 @@ class Cats extends Controller
                 return $cat;
             });
         }
+        $filter = array(
+            'is_filter' => false,
+            'props' => array(),
+        );
+        if($cat->products->count() > 0){
+            $filter_properties = array();
+            $filter_properties['price'] = array('min' => 99999, 'max' => 0);
+            foreach ($cat->products as $product) {
+                
+                if (isset($product->tovar_1c_att->price)) {
+                    $temp_price = intval($product->tovar_1c_att->price);
+                    $filter_properties['price']['min'] = min($temp_price, $filter_properties['price']['min']);
+                    $filter_properties['price']['max'] = max($temp_price, $filter_properties['price']['max']);
+                }
+                
+                foreach ($product->productProperties as $product_property) {
+                    $prop_slug = $product_property->name_property->slug;
+
+                    if(!in_array($prop_slug, array_keys($filter_properties))){
+                        $filter_properties[$prop_slug] = array(
+                            'name' => $product_property->name_property->name,
+                            'items' => array(),
+                        );
+                    }
+
+                    if (in_array($product_property->slug, array_keys($filter_properties[$prop_slug]['items']))) {
+                        $filter_properties[$prop_slug]['items'][$product_property->slug]['count'] += 1;
+                    } else {
+                        $filter_properties[$prop_slug]['items'][$product_property->slug] = array(
+                            'count' => 1,
+                            'value' => $product_property->value
+                        );
+                    }
+                }
+            }
+            if(count(array_keys($filter_properties)) > 1){
+                $filter = array(
+                    'is_filter' => true, 
+                    'props' => $filter_properties
+                );
+            }
+        }
+
+
+        
 
         $seo = self::seo()
             ->setTitle((mb_strlen($cat->tit, 'utf8') > 5 ? $cat->tit : $cat->name))
@@ -102,6 +146,6 @@ class Cats extends Controller
             ->setKeywords($cat->keywords)
             ->all();
 
-        return view('public.cats.list_products', compact('cat', 'canonical', 'seo'));
+        return view('public.cats.list_products', compact('cat', 'canonical', 'seo', 'filter'));
     }
 }

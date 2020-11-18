@@ -19,3 +19,21 @@
         </div>
     </div>
 </div>
+@if($filter['is_filter'])
+<div class="cat_sidebar" style="margin-top: 20px;">
+    <div class="row">
+        <div class="container-fluid">
+            <div class="title">Фильтр</div>
+            <form action="" method="GET">
+                <div class="filter">
+                    @foreach($filter['props'] as $prop)
+                        prop
+                        {{$prop['name']}}
+                        <div class="title">{{ $prop['name'] }}</div>
+                    @endforeach
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endif
