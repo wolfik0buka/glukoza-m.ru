@@ -24,7 +24,7 @@
     <div class="row">
         <div class="container-fluid">
             <div class="title">Фильтр</div>
-            <form action="" method="GET">
+            <form action="" method="GET" id="product_filter">
                 <div class="filter">
                     <input 
                         type="checkbox" 
@@ -48,7 +48,30 @@
                                     </label><!-- /input-group -->
                                 @endforeach
                             @else
-                                <p>Здесь Цена</p>
+
+
+                                <div id="price-slider"></div>
+                                <script>
+                                    var slider_settings = {
+                                        max: 5000,
+                                        min: 500,
+                                        cur_min: 500,
+                                        cur_max: 4900,
+                                    };
+                                </script>
+                                <script src="/js/public/filter.js"></script>
+                                <div class="prices_values">
+                                    <div class="prices_value">
+                                        <label class="price_value">
+                                            От:
+                                            <input type="text" name="price[from]" id="price_from">
+                                        </label>
+                                        <label class="price_value">
+                                            До:
+                                            <input type="text" name="price[to]" id="price_to">
+                                        </label>
+                                    </div>
+                                </div>
                             @endif
 
                         </div>
@@ -56,7 +79,7 @@
                 </div>
                 <div class="buttons">
                     <input type="submit" value="Показать" class="btn btn-primary">
-                    <input type="reset" value="Сбросить" class="btn btn-light">
+                    <input type="reset" id="form_reset" value="Сбросить" class="btn btn-light">
                 </div>
             </form>
         </div>

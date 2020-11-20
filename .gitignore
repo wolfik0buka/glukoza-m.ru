@@ -1,5 +1,5 @@
 !.gitignore
-
+.idea
 vendor/*
 userfiles/*
 node_modules/*
