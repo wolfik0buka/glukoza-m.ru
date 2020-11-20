@@ -48,15 +48,13 @@
                                     </label><!-- /input-group -->
                                 @endforeach
                             @else
-
-
                                 <div id="price-slider"></div>
                                 <script>
                                     var slider_settings = {
-                                        max: 5000,
-                                        min: 500,
-                                        cur_min: 500,
-                                        cur_max: 4900,
+                                        max: {{$prop['items']['max']}},
+                                        min: {{$prop['items']['min']}},
+                                        cur_min: {{$prop['items']['cur_min']}},
+                                        cur_max: {{$prop['items']['cur_max']}},
                                     };
                                 </script>
                                 <script src="/js/public/filter.js"></script>
