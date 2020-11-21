@@ -111,6 +111,15 @@ class Cats extends Controller
         if (isset($_GET['is_filter']) and $_GET['is_filter'] == 'true') {
             $filter_props = Cats::get_from_request_filters();
             
+            foreach ($filter_props as $slug => $values) {
+                if ($slug === 'price') {
+                    continue;
+                }
+                foreach ($values as $slug_value) {
+                    $filter['props'][$slug]['items'][$slug_value]['checked'] = true;
+                }
+            }
+            
             $cat->products = $cat->products
                 ->filter(function($product) use ($filter_props, &$filter ) {
                     $props = array();
@@ -123,26 +132,35 @@ class Cats extends Controller
                             $bool_min_price = false;
                             if (isset($prop_values['to']) and intval($prop_values['to']) < $filter['props']['price']['items']['max'] ) {
                                 $filter['props']['price']['items']['cur_max'] = $prop_values['to'];
-                            }
-                            if (isset($prop_values['from']) and intval($prop_values['from']) > $filter['props']['price']['items']['min'] ) {
-                                $filter['props']['price']['items']['cur_min'] = $prop_values['from'];
-                            }
-                            if (isset($product->tovar_1c_att->price) and ($bool_max_price or $bool_min_price)) {
-                                $cur_price = intval($product->tovar_1c_att->price);
-                                if (isset($prop_values['to']) and 
-                                intval($prop_values['to']) < $cur_price) {
-                                    return false;
-                                }
-                                if (isset($prop_values['from']) and 
-                                intval($prop_values['from']) > $cur_price) {
-                                    return false;
-                                }
-                            }else {
-                                return false;
+                                $bool_max_price = true;
                             }
                             
+                            if (isset($prop_values['from']) and intval($prop_values['from']) > $filter['props']['price']['items']['min'] ) {
+                                $filter['props']['price']['items']['cur_min'] = $prop_values['from'];
+                                $bool_min_price = true;
+                            }
+                            if ($bool_max_price or $bool_min_price) {
+                                if (isset($product->tovar_1c_att->price)) {
+                                    $cur_price = intval($product->tovar_1c_att->price);
+                                    if (isset($prop_values['to']) and
+                                        intval($prop_values['to']) < $cur_price) {
+                                        return false;
+                                    }
+                                    if (isset($prop_values['from']) and
+                                        intval($prop_values['from']) > $cur_price) {
+                                        return false;
+                                    }
+        
+                                    if(!$product->is_available or $product->is_available == null){
+                                        return false;
+                                    }
+                                } else {
+                                    return false;
+                                }
+                            }
+                           
+                            
                         } else {
-                            var_export($filter['props']);
                             if (!in_array($prop_slug, array_keys($props))) {
                                 return false;
                             }
@@ -207,7 +225,7 @@ class Cats extends Controller
             );
             foreach ($products as $product) {
                 
-                if (isset($product->tovar_1c_att->price) and $product->tovar_1c_att->price ) {
+                if (isset($product->tovar_1c_att->price) and $product->tovar_1c_att->price and $product->is_available) {
                     $temp_price = intval($product->tovar_1c_att->price);
    
                     $filter_properties['price']['items']['min'] = min($temp_price, $filter_properties['price']['items']['min']);
@@ -229,7 +247,8 @@ class Cats extends Controller
                     } else {
                         $filter_properties[$prop_slug]['items'][$product_property->slug] = array(
                             'count' => 1,
-                            'value' => $product_property->value
+                            'value' => $product_property->value,
+                            'checked' => false
                         );
                     }
                 }

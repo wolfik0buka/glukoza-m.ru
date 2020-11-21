@@ -42,9 +42,12 @@
                                                 type="checkbox" 
                                                 name="f_{{$slug}}[{{$option_slug}}]"
                                                 value="true"
+                                                @if ($variant['checked'])
+                                                    checked
+                                                @endif
                                             >
                                         {{$variant["value"]}} 
-                                        <span class="filter__total">({{$variant["count"]}})</span>
+
                                     </label><!-- /input-group -->
                                 @endforeach
                             @else
