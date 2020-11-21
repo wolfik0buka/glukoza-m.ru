@@ -15,6 +15,7 @@
             <link rel="canonical" href="https://glukoza-med.ru{!! $canonical !!}"/>@endif
         @yield('opengraph')
 
+
         <script>(function(e, t) {
                 typeof module != "undefined" && module.exports ? module.exports = t() : typeof define == "function" && define.amd ? define(
                     t) : this[e] = t();
@@ -120,6 +121,7 @@
         {{--CSS--}}
         <link rel="stylesheet" href="/js/public/css/chunk-vendors.css">
         <link rel="stylesheet" href="/css/datepicker.min.css">
+        <link rel="stylesheet" href="/js/vendor/jquery-ui/jquery-ui.min.css">
         <link rel="stylesheet" href="/js/vendor/magnific-popup_1.0.0.min.css">
         <link rel="stylesheet" href="/js/public/css/app.css">
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,400i,500,700&amp;subset=cyrillic">
@@ -332,6 +334,8 @@
         </script>
 
         <script src="/js/vendor/magnific-popup_1.0.0.min.js"></script>
+        <script src="/js/vendor/jquery-ui/jquery-ui.min.js"></script>
+
         <script src="/js/public/js/chunk-vendors.js"></script>
         <script src="/js/public/js/app.js"></script>
     </body>

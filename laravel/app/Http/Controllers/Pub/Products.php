@@ -49,6 +49,7 @@ class Products extends Controller
             $product = Tovar::with([
                 'linksToCats',
                 'tovar_1c_att',
+                'productProperties.name_property',
                 'relatedProducts.tovar_1c_att'
             ])
                 ->where('del', 0)
@@ -57,6 +58,11 @@ class Products extends Controller
         } catch (ModelNotFoundException $ex) {
             app()->abort(404);
         }
+        // foreach ($product->productProperties as $productProperty) {
+        //     var_export( $productProperty->id_property);
+        //     var_export( $productProperty->value);
+        //     var_export( $productProperty->name_property->name);
+        // }
 
         $cat = self::getParentCatForProduct($product);
 
