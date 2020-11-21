@@ -26,4 +26,14 @@ $( function() {
         window.location.href = window.location.href.split('?')[0];
     })
 
+    $('.filter-box__show-all').click(function () {
+        $(this).siblings('.filter-box__closed-options').show();
+        $(this).remove();
+    });
+
+    $('.do_expand_filter_box').click(function () {
+        $(this).siblings('.filter_body').toggle(200);
+        $(this).toggleClass('closed');
+    });
+
 });

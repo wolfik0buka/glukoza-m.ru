@@ -20,61 +20,80 @@
     </div>
 </div>
 @if($filter['is_filter'])
-<div class="cat_sidebar" style="margin-top: 20px;">
+<div class="cat_sidebar filter" style="margin-top: 20px;">
     <div class="row">
         <div class="container-fluid">
-            <div class="title">Фильтр</div>
+            <div class="filter__title">Фильтр</div>
             <form action="" method="GET" id="product_filter">
-                <div class="filter">
+                <div>
                     <input 
                         type="checkbox" 
                         name="is_filter"
                         value="true"
+                        class="filter__enable"
                         checked
                     >
                     @foreach ($filter['props'] as $slug => $prop)
-                        <div class="title">{{$prop["name"]}}</div>
-                        <div class="filter_body">
-                            @if ($slug !== 'price')
-                                @foreach ($prop["items"] as $option_slug => $variant)
-                                    <label class="input-group">
-                                            <input 
-                                                type="checkbox" 
-                                                name="f_{{$slug}}[{{$option_slug}}]"
-                                                value="true"
-                                                @if ($variant['checked'])
-                                                    checked
-                                                @endif
-                                            >
-                                        {{$variant["value"]}} 
+                        <div class="filter-box">
+                            <div class="filter-box__title do_expand_filter_box">
+                                {{$prop["name"]}}
+                                <i class="fa fa-chevron-up"></i>
+                            </div>
+                            <div class="filter_body">
+                                @if ($slug !== 'price')
+                                    {{ '', $counter = 0 }}
+                                    {{ '', $max_option = 5 }}
 
-                                    </label><!-- /input-group -->
-                                @endforeach
-                            @else
-                                <div id="price-slider"></div>
-                                <script>
-                                    var slider_settings = {
-                                        max: {{$prop['items']['max']}},
-                                        min: {{$prop['items']['min']}},
-                                        cur_min: {{$prop['items']['cur_min']}},
-                                        cur_max: {{$prop['items']['cur_max']}},
-                                    };
-                                </script>
-                                <script src="/js/public/filter.js"></script>
-                                <div class="prices_values">
-                                    <div class="prices_value">
-                                        <label class="price_value">
-                                            От:
-                                            <input type="text" name="price[from]" id="price_from">
-                                        </label>
-                                        <label class="price_value">
-                                            До:
-                                            <input type="text" name="price[to]" id="price_to">
-                                        </label>
+                                     @foreach ($prop["items"] as $option_slug => $variant)
+                                        {{'',$counter++ }}
+                                        @if ($counter === $max_option +1 )
+                                            <div class="filter-box__closed-options">
+                                        @endif
+                                        <label class="label-group">
+                                                <input
+                                                    type="checkbox"
+                                                    name="f_{{$slug}}[{{$option_slug}}]"
+                                                    value="true"
+                                                    @if ($variant['checked'])
+                                                        checked
+                                                    @endif
+                                                >
+                                            {{$variant["value"]}}
+                                        </label><!-- /input-group -->
+                                    @endforeach
+                                    @if ($counter > $max_option)
+                                            </div>
+                                            <div class="filter-box__show-all">
+                                                Показать еще {{$counter - $max_option}}
+                                            </div>
+                                            @endif
+
+                                @else
+                                    <div id="price-slider"></div>
+                                    <script>
+                                        var slider_settings = {
+                                            max: {{$prop['items']['max']}},
+                                            min: {{$prop['items']['min']}},
+                                            cur_min: {{$prop['items']['cur_min']}},
+                                            cur_max: {{$prop['items']['cur_max']}},
+                                        };
+                                    </script>
+                                    <script src="/js/filter.js"></script>
+                                    <div class="prices_values">
+                                        <div class="prices_value">
+                                            <label class="price_value">
+                                                От:
+                                                <input type="text" name="price[from]" id="price_from">
+                                            </label>
+                                            <label class="price_value">
+                                                До:
+                                                <input type="text" name="price[to]" id="price_to">
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                            @endif
+                                @endif
 
+                            </div>
                         </div>
                     @endforeach
                 </div>
