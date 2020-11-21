@@ -17,6 +17,8 @@ class AppServiceProvider extends ServiceProvider
         view()->share('cat_url', '/category/');
         view()->share('static_url', '/index.php?page=stat&alias=');
         view()->share('cdn', "https://cdn.glukoza-med.ru");
+        view()->share('city', isset($_COOKIE['city']) ? $_COOKIE['city'] : "Санкт-Петербург");
+        
     }
 
     public function register()
