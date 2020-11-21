@@ -254,8 +254,6 @@
                     <p class="text-white">Магазин медицинской техники в Санкт-Петербурге, доставка по всей России.</p>
                     <p class="text-white">ООО «Сингер-Мед».</p>
                     <p class="text-white">Лицензия №__ от __ месяца ____ г.</p>
-
-
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3">
@@ -266,6 +264,8 @@
                     <a href="/oplata">Способы оплаты</a>
                     <a href="/kontakty">Контакты и адреса магазинов</a>
                     <a href="/vozvrat">Условия возврата</a>
+
+
                     <a href="/card-payment">Оплата банковскими картами</a>
                     <a href="/category/aktsii">Акции</a>
                 </div>
@@ -281,6 +281,8 @@
                 <div class="footer__links">
                     <a href="/requisites">Реквизиты</a>
                     <a href="/oferta">Публичная оферта</a>
+                    <a href="/kak-sdelat-zakaz">Как сделать заказ</a>
+                    <a href="/obratnaya-svyaz">Обратная связь</a>
                     <a href="/politika-konfidencialnosti">Политика конфиденциальности</a>
                     <a class="font-lh110 top-3" href="/soglasie-na-obrabotku-pd">Пользовательское соглашение</a>
                 </div>

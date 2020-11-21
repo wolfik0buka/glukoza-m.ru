@@ -33,7 +33,11 @@ Route::group(['namespace' => 'Pub'], function () {
     Route::get('/vozvrat', 'StaticPages@pageVozvrat');
     Route::get('/politika-konfidencialnosti', 'StaticPages@pagePolitikaKonfidencialnosti');
     Route::get('/oplata', 'StaticPages@pageOplata');
+    Route::get('/kak-sdelat-zakaz', 'StaticPages@pageOrderInstruction');
     Route::get('/soglasie-na-obrabotku-pd', 'StaticPages@pageConfirm');
+    
+    Route::get('/obratnaya-svyaz', 'Feedback@index');
+    Route::post('/feedback-handler', 'Feedback@handler');
     
     Route::get('/category/{slug}', 'Cats@singleSlug');
     Route::get('/product/{symbol_code}', 'Products@singleSymbol');
