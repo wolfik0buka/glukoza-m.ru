@@ -77,10 +77,14 @@
                 </ul>
             </div>
         @else
-            <div class="topLine_element pull-right">
-                <a href="/cabinet/auth_form">
+            <div class="topLine_element pull-right dropdown">
+                <a  class="dropdown-toggle" data-toggle="dropdown" role="button">
                     <i class="right-5 fa fa-sign-in"></i>Личный кабинет
                 </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/cabinet/auth_form">Вход</a></li>
+                    <li><a href="/cabinet/reg_form">Зарегистрироваться</a></li>
+                </ul>
             </div>
         @endif
 
