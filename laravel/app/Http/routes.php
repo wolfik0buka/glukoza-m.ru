@@ -36,6 +36,9 @@ Route::group(['namespace' => 'Pub'], function () {
     Route::get('/kak-sdelat-zakaz', 'StaticPages@pageOrderInstruction');
     Route::get('/soglasie-na-obrabotku-pd', 'StaticPages@pageConfirm');
     
+    Route::get('/otzyvy', 'Responses@getAll');
+    
+    
     Route::get('/obratnaya-svyaz', 'Feedback@index');
     Route::post('/feedback-handler', 'Feedback@handler');
     

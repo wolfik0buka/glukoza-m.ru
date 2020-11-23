@@ -280,7 +280,7 @@
                 <div class="footer__title">Информация</div>
                 <div class="footer__links">
                     <a href="/requisites">Реквизиты</a>
-                    <a href="/oferta">Публичная оферта</a>
+                    <a href="/oferta">Публичная оферта</a
                     <a href="/kak-sdelat-zakaz">Как сделать заказ</a>
                     <a href="/obratnaya-svyaz">Обратная связь</a>
                     <a href="/politika-konfidencialnosti">Политика конфиденциальности</a>
