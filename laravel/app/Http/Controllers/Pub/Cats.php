@@ -54,23 +54,108 @@ class Cats extends Controller
             )
                 ->where('slug', $slug)
                 ->firstOrFail();
-            $canonical = '/category/'.$cat->slug;
+            $canonical = '/category/' . $cat->slug;
         } catch (ModelNotFoundException $ex) {
             return response()
                 ->view('errors.404')
                 ->setStatusCode(404);
         }
+       
+        $sort_by = isset($_GET['sort']) ? $_GET['sort'] : 'name';
+        $sort_order = isset($_GET['order']) ? $_GET['order'] : 'asc';
+        if ($sort_order === 'asc') // Сортируем по имени
+        {
+            switch ($sort_by) {
+                case 'price':
+                    $cat->products = $cat->products
+                        ->map(function($product){
+                            $product->sort = (isset($product->tovar_1c_att->price) and $product->is_available) ?
+                                $product->tovar_1c_att->price :
+                                9999999;
+                            return $product;
+                        })->sortBy('sort');
+                    break;
+                case 'popular':
+                    $cat->products = $cat->products
+                        ->map(function($product){
+                            $product->sort = implode('-', [
+                                $product->is_available ? 0 : 1,
+                                $product->id
+                            ]);
+                            return $product;
+                        })->sortBy('sort');
+                    break;
+                default:
+                    $cat->products = $cat->products
+                        ->map(function($product){
+                            $product->sort = implode('-', [
+                                $product->is_available ? 0 : 1,
+                                $product->name
+                            ]);
+                            return $product;
+                        })->sortBy('sort');
+                    break;
+                    
+            }
+        } else {
+            switch ($sort_by) {
+                case 'price':
+                    $cat->products = $cat->products
+                        ->map(function($product){
+                            $product->sort = (isset($product->tovar_1c_att->price) and $product->is_available) ?
+                                $product->tovar_1c_att->price :
+                                0;
+                            return $product;
+                        })->sortByDesc('sort');
+                    break;
+                case 'popular':
+                    $cat->products = $cat->products
+                        ->map(function($product){
+                            $product->sort = implode('-', [
+                                $product->is_available ? 1 : 0,
+                                $product->id
+                            ]);
+                            return $product;
+                        })->sortByDesc('sort');
+                    break;
+                default:
+                    $cat->products = $cat->products
+                        ->map(function($product){
+                            $product->sort = implode('-', [
+                                $product->is_available ? 1 : 0,
+                                $product->name
+                            ]);
+                            return $product;
+                        })->sortByDesc('sort');
+                    break;
+            }
+        }
+        $sort_base = explode('?',$_SERVER['REQUEST_URI'])[0] . '?';
+        $params = $_GET;
+
         
-        // Сортируем по имени
-        $cat->products = $cat->products
-            ->map(function ($product) {
-                $product->sort = implode('-', [
-                    $product->is_available ? 0 : 1,
-                    $product->name
-                ]);
-                return $product;
-            })
-            ->sortBy('sort');
+        $sort_links[] = array(
+            'name' => 'По популярности',
+            'slug' => 'popular',
+            'order' => ($sort_by === 'popular' and $sort_order === 'asc') ? 'desc' : 'asc'
+        );
+        $sort_links[] = array(
+            'name' => 'По названию',
+            'slug' => 'name',
+            'order' => ($sort_by === 'name' and $sort_order === 'asc') ? 'desc' : 'asc'
+        );
+        $sort_links[] = array(
+            'name' => 'По цене',
+            'slug' => 'price',
+            'order' => ($sort_by === 'popular' and $sort_order === 'asc') ? 'desc' : 'asc'
+        );
+        foreach ($sort_links as &$sort_link){
+            $params['sort'] = $sort_link['slug'];
+            $params['order'] = ($sort_by === $sort_link['slug'] and $sort_order === 'asc') ? 'desc' : 'asc';
+            $sort_link['link'] = $sort_base . http_build_query($params);
+        }
+
+        
 
         $cat->childs = $cat->childs->filter(function ($cat) {
             return $cat->products->count()  > 0 ? true : false;
@@ -180,7 +265,7 @@ class Cats extends Controller
             ->setKeywords($cat->keywords)
             ->all();
 
-        return view('public.cats.list_products', compact('cat', 'canonical', 'seo', 'filter'));
+        return view('public.cats.list_products', compact('cat', 'canonical', 'seo', 'filter', 'sort_links'));
     }
     
     public static function get_from_request_filters()

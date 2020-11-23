@@ -18,7 +18,20 @@
                         </div>
                     </div>
                 @endif
+
                 @if(count($cat->products) > 0)
+                    <div class="sortLine bottom-20">
+                        @foreach($sort_links as $link)
+                            <a href="{{$link['link']}}" class="sortLine__link">
+                                {{$link['name']}}
+                                @if ($link['order'] === 'asc')
+                                    <i class="fa fa-sort-amount-asc"></i>
+                                @else
+                                    <i class="fa fa-sort-amount-desc"></i>
+                                @endif
+                            </a>
+                        @endforeach
+                    </div>
                     <div class="products">
                         @foreach($cat->products as $product)
                             @include('public.cats.product_card', ['card_size' => 'col-sm-6'])
