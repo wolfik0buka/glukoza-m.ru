@@ -138,6 +138,10 @@
         <script src="/js/ymaps_arrows.js"></script>
     @endif
 
+    @if( Request::is('obratnaya-svyaz'))
+        <meta name="robots" content="noindex, nofollow">
+    @endif
+
     @yield('java_box')
 </head>
 
@@ -283,6 +287,7 @@
                     <a href="/oferta">Публичная оферта</a
                     <a href="/kak-sdelat-zakaz">Как сделать заказ</a>
                     <a href="/obratnaya-svyaz">Обратная связь</a>
+                    <a href="/otzyvy">Отзывы</a>
                     <a href="/politika-konfidencialnosti">Политика конфиденциальности</a>
                     <a class="font-lh110 top-3" href="/soglasie-na-obrabotku-pd">Пользовательское соглашение</a>
                 </div>

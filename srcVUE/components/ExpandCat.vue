@@ -1,9 +1,10 @@
 <template>
-    <div class="expandCat">
+    <div class="expandCat" @mouseover=showMenu @mouseleave=closeMenu >
 
         <div
           class="expandCat__button"
           @click=toggleMenu
+          @mouseover=toggleMenu
           :class="{opened:isOpened}">
 
             <template v-if=!isMobile >
@@ -73,6 +74,9 @@
             toggleMenu() {
                 this.isOpened = !this.isOpened
                 _ym.goal('expandcat')
+            },
+            showMenu(){
+                if (!this.isOpened) { this.isOpened = true }
             },
             closeMenu() {
                 if (this.isOpened) { this.isOpened = false }
