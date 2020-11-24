@@ -1,14 +1,25 @@
 <?php namespace App;
 header('Content-Type: text/xml; charset=utf-8');
 include '../../php/mysqlconnect_new.php';
-include 'query.php';
+include '../../php/query.php';
 global $mysqli;
 $txt = 'Ошибка';
+if (mysqli_connect_errno()) {
+    $txt .= var_export(mysqli_connect_error(), true);
+}else{
+    $txt .= 'УС';
+}
+
 switch ($_POST['doIt']) {
     case('priv'):
-        $stmt = $mysqli->prepare('update 1c_tovar set id_tovar = ? where id = ?');
+        $stmt = $mysqli->prepare('update 1c_tovar set id_tovar = ? where id = ? ;');
+        
         $stmt->bind_param('is', $_POST["id"], $_POST["cur_1c"]);
-        if ($stmt->execute()) $txt = 'Привязано';
+        $temp = $stmt->execute();       
+        if ($temp) {$txt = 'Привязано';}
+        else{
+            $txt.=var_export($stmt->error_list, true);
+        }
         break;
     case('unmount'):
         $stmt = $mysqli->prepare('update 1c_tovar set id_tovar = ? where id = ?');
