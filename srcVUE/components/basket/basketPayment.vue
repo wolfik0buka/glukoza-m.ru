@@ -8,6 +8,13 @@
                     <div class="basket__formLabel"></div>
                     
                     <div class="basket__formContainer">
+                        <div class="radio" v-if="[2, 3].indexOf(order.delivery)>=0">
+                            <label>
+                                <input type="radio" v-model="payment_type_id" :value="4">
+                                Банковской картой курьеру
+                                <div class="input-helper text-muted font-s13"></div>
+                            </label>
+                        </div>
                         
                         <div class="radio" v-if="order.delivery!==4">
                             <label>
