@@ -5,12 +5,16 @@ userfiles/*
 node_modules/*
 laravel/vendor/
 laravel/storage/logs/
+laravel/storage/app/products/*
 laravel/storage/framework/cache/
 laravel/storage/framework/sessions/
 laravel/storage/framework/views/
 laravel/config/services.php
 laravel/.env
 php/mysqlconnect_new.php
+Renamer.py
+
+*/**/.htaccess
 
 img/resize/cache/
 
