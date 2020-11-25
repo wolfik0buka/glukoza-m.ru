@@ -48,6 +48,7 @@
                 <div class="basket__formItem">
                     <div class="basket__formLabel">Комментарий к заказу</div>
                     <textarea
+                            placeholder="У вас остались вопросы? Есть промо-код?"
                             class="basket__formField textfield"
                             @keyup="updateOrder"
                             v-model="order.comment">
