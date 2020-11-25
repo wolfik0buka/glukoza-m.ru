@@ -29,7 +29,7 @@
             </a>
             <div class="dropdown-menu">
                 <div class="text-muted font-s13 font-lh140">Контактный email:</div>
-                <a href="mailto:glukoza@glukoza-med.ru">glukoza@glukoza-med.ru</a>
+                <a href="mailto:shop@glukoza-med.ru">shop@glukoza-med.ru</a>
                 {{--<div class="divider"></div>--}}
                 {{--<div class="text-muted font-s13 font-lh140">Или отправьте сообщение прямо здесь:</div>--}}
                 {{--<form action="#">--}}
@@ -60,6 +60,7 @@
         <div class="topLine_element hidden-xs hidden-sm">
             <a href="/kontakty" title="Контакты">Контакты</a>
         </div>
+
 
 
         @if(Session::has('user'))

@@ -21,6 +21,7 @@
 
                 @if(count($cat->products) > 0)
                     <div class="sortLine bottom-20">
+                        <span class="right-15">Сортировать:</span>
                         @foreach($sort_links as $link)
                             <a href="{{$link['link']}}" class="sortLine__link">
                                 {{$link['name']}}

@@ -211,7 +211,10 @@
                     </div>
                     <div class="headerContacts__worktime">
                         Время работы:
-                        {{ getSettings('headerWorkTime') }}
+                        {{-- getSettings('headerWorkTime') --}}
+                        пн-пт: 10:00 до 20:00 <br>
+                        сб-вс с 10:00 до 19:00
+                        <br>
                     </div>
                     <div class="headerContacts__contactLink">
                         Ваш город
