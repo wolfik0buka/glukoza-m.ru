@@ -260,7 +260,6 @@
                     <p class="arial font-s16 font-w600 text-white">Медтехника и товары для контроля диабета</p>
                     <p class="text-white">Магазин медицинской техники в Санкт-Петербурге, доставка по всей России.</p>
                     <p class="text-white">ООО «Сингер-Мед».</p>
-                    <p class="text-white">Лицензия №__ от __ месяца ____ г.</p>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3">
