@@ -28,13 +28,9 @@
                             </div>
                             <div class="col-xs-12 col-sm-4 ptop-10 text-center">
                                 <div class="font-s14 text-muted">Телефон (Санкт-Петербург)</div>
-                                <div class="font-s18 font-w600">
-                                <a
-                                    class="color-text-default"
-                                    type="tel"
-                                    href="tel:{{ str_replace([" ", "-", "(", ")"], "", getSettings('phone_ul')) }}">
-                                    {{ getSettings('phone_ul') }}
-                                </a>
+                                <div class="font-s18 font-w600 text-center">
+                                    <a href="tel:+78122444102">+7 (812) 244-41-02</a> <br>
+                                    <a href="tel:+78122444192">+7 (812) 244-41-92</a> <br>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-4 ptop-10 text-center">
@@ -45,9 +41,21 @@
                                         href="mailto:glukoza@glukoza-med.ru">
                                         glukoza@glukoza-med.ru
                                     </a>
+                                    <br>
+                                    <a
+                                        class="color-text-default"
+                                        href="mailto:tiv@glukoza-med.ru">
+                                        tiv@glukoza-med.ru
+                                    </a>
+                                    <br>
+                                    <a
+                                        class="color-text-default"
+                                        href="mailto:skv@glukoza-medru">
+                                        skv@glukoza-med.ru
+                                    </a>
+                                    <br>
                                 </div>
                             </div>
-
                         </div>
                 </div>
 
