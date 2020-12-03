@@ -39,9 +39,19 @@
                         @endforeach
                     </div>
                 @endif
+
+                @if($cat->down_text)
+                    <div class="row ">
+                        <div class="col-sm-12 panel top-15 bottom-30">
+                            <br>
+                            {!! $cat->down_text !!}
+                        </div>
+                    </div>
+                        
+                @endif
             </div>
 
-            <div class="col-sm-12 col-md-3 col-md-pull-9">
+            <div class="col-sm-12 col-md-3 col-md-pull-9 ">
                 @include('public.cats.sidebar')
             </div>
 
