@@ -136,6 +136,7 @@
         @endif
 
         @yield('java_box')
+        <script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://vk.com/js/api/openapi.js?168",t.onload=function(){VK.Retargeting.Init("VK-RTRG-595612-h5vT"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script>
     </head>
 
     <body>
@@ -143,6 +144,9 @@
             <iframe
                 src="https://www.googletagmanager.com/ns.html?id=GTM-WNGSK62" height="0" width="0"
                 style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <noscript>
+            <img src="https://vk.com/rtrg?p=VK-RTRG-595612-h5vT" style="position:fixed; left:-999px;" alt=""/>
         </noscript>
 
         <div id="app">
