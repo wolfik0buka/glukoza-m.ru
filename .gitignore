@@ -1,5 +1,6 @@
 !.gitignore
-
+ar/*
+.idea
 vendor/*
 userfiles/*
 node_modules/*
