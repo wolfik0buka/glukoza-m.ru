@@ -23,7 +23,6 @@
         align-items: center;
         justify-content: center;
         flex-wrap: nowrap;
-        width: 100%;
         @media (min-width:768px) {
             justify-content: flex-start;
         }
@@ -158,6 +157,13 @@
                 }
             }
         }
+        &__contactLink{
+            display: flex;
+            justify-content: flex-end;
+            .dropdown{
+                margin-left: 10px;
+            }
+        }
 
     }
 
@@ -236,10 +242,17 @@
                 margin-bottom: -2px;
             }
         }
-        &.open{
+        &.open,
+        &:hover{
             & > a{
                 background: darken(@blue, 5%);
             }
+            .dropdown-menu{
+                display: block;
+                margin-top: 0;
+                padding: 10px;
+            }
+
         }
     }
     &:first-of-type{

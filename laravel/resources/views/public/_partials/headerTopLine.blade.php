@@ -29,7 +29,7 @@
             </a>
             <div class="dropdown-menu">
                 <div class="text-muted font-s13 font-lh140">Контактный email:</div>
-                <a href="mailto:glukoza@glukoza-med.ru">glukoza@glukoza-med.ru</a>
+                <a href="mailto:shop@glukoza-med.ru">shop@glukoza-med.ru</a>
                 {{--<div class="divider"></div>--}}
                 {{--<div class="text-muted font-s13 font-lh140">Или отправьте сообщение прямо здесь:</div>--}}
                 {{--<form action="#">--}}
@@ -62,6 +62,7 @@
         </div>
 
 
+
         @if(Session::has('user'))
             <div class="topLine_element pull-right dropdown">
                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
@@ -77,10 +78,14 @@
                 </ul>
             </div>
         @else
-            <div class="topLine_element pull-right">
-                <a href="/cabinet/auth_form">
+            <div class="topLine_element pull-right dropdown">
+                <a  class="dropdown-toggle" data-toggle="dropdown" role="button">
                     <i class="right-5 fa fa-sign-in"></i>Личный кабинет
                 </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/cabinet/auth_form">Вход</a></li>
+                    <li><a href="/cabinet/reg_form">Зарегистрироваться</a></li>
+                </ul>
             </div>
         @endif
 

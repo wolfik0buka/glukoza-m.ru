@@ -5,7 +5,7 @@
     "author": "opmyukka <opmyukka@gmail.com>",
     "private": true,
     "scripts": {
-        "b_admin" : "vue build --dest js/admin ./srcAdmin/adminEntry.js", 
+        "b_admin": "vue build --dest js/admin ./srcAdmin/adminEntry.js",
         "b_public": "vue build --dest js/public ./srcVUE/vue.js"
     },
     "dependencies": {

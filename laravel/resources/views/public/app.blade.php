@@ -1,61 +1,60 @@
 <!doctype html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name=viewport content="width=device-width, initial-scale=1">
-        <meta name="yandex-verification" content="1c0682a1978c2dbf"/>
+<head>
+    <meta charset="UTF-8">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="yandex-verification" content="1c0682a1978c2dbf"/>
 
-        <title>@yield('title')</title>
-        <meta name="description" content="@yield('description')"/>
-        <meta name="keywords" content="@yield('keywords')"/>
+    <title>@yield('title')</title>
+    <meta name="description" content="@yield('description')"/>
+    <meta name="keywords" content="@yield('keywords')"/>
 
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-        
-        @if(isset($canonical) && $canonical)
-            <link rel="canonical" href="https://glukoza-med.ru{!! $canonical !!}"/>@endif
-        @yield('opengraph')
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
-        <script>(function(e, t) {
-                typeof module != "undefined" && module.exports ? module.exports = t() : typeof define == "function" && define.amd ? define(
-                    t) : this[e] = t();
-            })("$script", function() {
-                function p(e, t) {
-                    for (var n = 0, i = e.length; n < i; ++n) if (!t(e[n])) return r;
-                    return 1;
+    @if(isset($canonical) && $canonical)
+        <link rel="canonical" href="https://glukoza-med.ru{!! $canonical !!}"/>@endif
+    @yield('opengraph')
+
+
+    <script>(function(e, t) {
+            typeof module != "undefined" && module.exports ? module.exports = t() : typeof define == "function" && define.amd ? define(
+                t) : this[e] = t();
+        })("$script", function() {
+            function p(e, t) {
+                for (var n = 0, i = e.length; n < i; ++n) if (!t(e[n])) return r;
+                return 1;
+            }
+
+            function d(e, t) {
+                p(e, function(e) {
+                    return t(e), 1;
+                });
+            }
+
+            function v(e, t, n) {
+                function g(e) {
+                    return e.call ? e() : u[e];
                 }
 
-                function d(e, t) {
-                    p(e, function(e) {
-                        return t(e), 1;
+                function y() {
+                    if (!--h) {
+                        u[o] = 1, s && s();
+                        for (var e in f) p(e.split("|"), g) && !d(f[e], g) && (f[e] = []);
+                    }
+                }
+               e = e[i] ? e : [e];
+                var r = t && t.call, s = r ? t : n, o = r ? e.join("") : t, h = e.length;
+                return setTimeout(function() {
+                    d(e, function t(e, n) {
+                        if (e === null) return y();
+                        !n && !/^https?:\/\//.test(e) && c && (e = e.indexOf(".js") === -1 ? c + e + ".js" : c + e);
+                        if (l[e]) return o && (a[o] = 1), l[e] == 2 ? y() : setTimeout(function() {
+                            t(e, !0);
+                        }, 0);
+                        l[e] = 1, o && (a[o] = 1), m(e, y);
                     });
-                }
-
-                function v(e, t, n) {
-                    function g(e) {
-                        return e.call ? e() : u[e];
-                    }
-
-                    function y() {
-                        if (!--h) {
-                            u[o] = 1, s && s();
-                            for (var e in f) p(e.split("|"), g) && !d(f[e], g) && (f[e] = []);
-                        }
-                    }
-
-                    e = e[i] ? e : [e];
-                    var r = t && t.call, s = r ? t : n, o = r ? e.join("") : t, h = e.length;
-                    return setTimeout(function() {
-                        d(e, function t(e, n) {
-                            if (e === null) return y();
-                            !n && !/^https?:\/\//.test(e) && c && (e = e.indexOf(".js") === -1 ? c + e + ".js" : c + e);
-                            if (l[e]) return o && (a[o] = 1), l[e] == 2 ? y() : setTimeout(function() {
-                                t(e, !0);
-                            }, 0);
-                            l[e] = 1, o && (a[o] = 1), m(e, y);
-                        });
-                    }, 0), v;
-                }
-
+                }, 0), v;
+            }
                 function m(n, r) {
                     var i = e.createElement("script"), u;
                     i.onload = i.onerror = i[o] = function() {
@@ -120,6 +119,8 @@
         {{--CSS--}}
         <link rel="stylesheet" href="/js/public/css/chunk-vendors.css">
         <link rel="stylesheet" href="/css/datepicker.min.css">
+        
+        <link rel="stylesheet" href="/js/vendor/jquery-ui/jquery-ui.min.css">
         <link rel="stylesheet" href="/js/vendor/magnific-popup_1.0.0.min.css">
         <link rel="stylesheet" href="/js/public/css/app.css">
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,400i,500,700&amp;subset=cyrillic">
@@ -134,6 +135,10 @@
             <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
             <script src="/js/ymaps_arrows.js"></script>
         @endif
+        
+         @if( Request::is('obratnaya-svyaz'))
+          <meta name="robots" content="noindex, nofollow">
+         @endif
 
         @yield('java_box')
         <script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://vk.com/js/api/openapi.js?168",t.onload=function(){VK.Retargeting.Init("VK-RTRG-595612-h5vT"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script>
@@ -189,154 +194,181 @@
                             <div class="logo__slogan">Медицинская техника и&nbsp;товары для&nbsp;контроля&nbsp;диабета</div>
                         </div>
 
-                        <div class="headerSocial hidden-xs hidden-sm">
-                            <div class="headerSocial__link" onclick="App.openInNewTab('https://vk.com/glukozamed')">
-                                <i class="fa fa-vk"></i>
-                            </div>
-							<div class="headerSocial__link" onclick="App.openInNewTab('https://instagram.com/glukoza_med?igshid=1ptlogabzzkbp')">
-                                <i class="fa fa-instagram"></i>
-                            </div>
-                        </div>
 
-                        <div class="headerContacts">
-                            <div class="headerContacts__phone">
-                                <a
-                                    type="tel"
-                                    href="tel:{{ str_replace([" ", "-", "(", ")"], "", getSettings('phone')) }}">
-                                    {{ getSettings('phone') }}
-                                </a>
-                            </div>
-                            <div class="headerContacts__worktime">
-                                {{ getSettings('headerWorkTime') }}
-                            </div>
-                            <div class="headerContacts__contactLink">
-                                <a href="/kontakty#map2">Санкт-Петербург</a>
-                            </div>
-                        </div>
-
+                <div class="headerSocial hidden-xs hidden-sm">
+                    <div class="headerSocial__link" onclick="App.openInNewTab('https://vk.com/glukozamed')">
+                        <i class="fa fa-vk"></i>
+                    </div>
+                    <div class="headerSocial__link" onclick="App.openInNewTab('https://instagram.com/glukoza_med?igshid=1ptlogabzzkbp')">
+                        <i class="fa fa-instagram"></i>
                     </div>
                 </div>
 
-                <div class="headerNavContainer">
-                    <header-nav></header-nav>
+                <div class="headerContacts">
+                    <div class="headerContacts__phone">
+                        <a
+                                type="tel"
+                                href="tel:{{ str_replace([" ", "-", "(", ")"], "", getSettings('phone')) }}">
+                            {{ getSettings('phone') }}
+                        </a>
+                    </div>
+                    <div class="headerContacts__worktime">
+                        Время работы:
+                        {{-- getSettings('headerWorkTime') --}}
+                        пн-пт: 10:00 до 20:00 <br>
+                        сб-вс с 10:00 до 19:00
+                        <br>
+                    </div>
+                    <div class="headerContacts__contactLink">
+                        Ваш город
+                        <div class="dropdown">
+                            <a  data-toggle="dropdown" role="button">
+                                <span class="do_set_city_value">{{$city}}</span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <li role="presentation" class="do_toggle_city"><a  role="menuitem" tabindex="-1" >Санкт-Петербург</a></li>
+                                <li role="presentation"class="do_toggle_city"><a role="menuitem" tabindex="-1" >Москва</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+
                 </div>
 
             </div>
-
-            {{--<div class="bg-white text-center hidden-xs hidden-sm hidden-md ptop-15 pbottom-15 sale__horizontal">--}}
-            {{--<img width="973px" src="{{ $cdn }}/sales/ny_2018_discountx2.jpg" alt="Скидка в 2 раза больше">--}}
-            {{--</div>--}}
-
-            @yield('content')
-
         </div>
 
-        <div class="footer">
-            <div class="container">
+        <div class="headerNavContainer">
+            <header-nav></header-nav>
+        </div>
 
-                <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                        <div class="footer__copyright">
-                            <p class="arial font-s16 font-w600 text-white">2012-{{ date('Y') }} © Глюкоза</p>
-                            <p class="arial font-s16 font-w600 text-white">Медтехника и товары для контроля диабета</p>
-                            <p class="text-white">Магазин медицинской техники в Санкт-Петербурге, доставка по всей России.</p>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <div class="footer__title">Покупателям</div>
-                        <div class="footer__links">
-                            <a href="/beznal">Для юридических лиц</a>
-                            <a href="/dostavka">Доставка и самовывоз</a>
-                            <a href="/oplata">Способы оплаты</a>
-                            <a href="/kontakty">Контакты и адреса магазинов</a>
-                            <a href="/vozvrat">Условия возврата</a>
-                            <a href="/card-payment">Оплата банковскими картами</a>
-                        </div>
-                        <div class="footer__title">Сервисы</div>
-                        <div class="footer__links">
-                            <a href="/cabinet/auth_form">Личный кабинет</a>
-                            <a href="/track-orders">Отслеживание заказов</a>
-                            <a href="/bonusnaya-programma">Бонусная программа</a>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <div class="footer__title">Информация</div>
-                        <div class="footer__links">
-                            <a href="/requisites">Реквизиты</a>
-                            <a href="/oferta">Публичная оферта</a>
-                            <a href="/politika-konfidencialnosti">Политика конфиденциальности</a>
-                            <a class="font-lh110 top-3" href="/soglasie-na-obrabotku-pd">Пользовательское соглашение</a>
-                        </div>
-                    </div>
-                </div>
+    </div>
 
-                <div class="footer__cards text-center ptop-15">
-                    <img src="{{ $cdn }}/cards_payment/footer-payment-types-bw.png" alt="Способы оплаты">
-                </div>
+    {{--<div class="bg-white text-center hidden-xs hidden-sm hidden-md ptop-15 pbottom-15 sale__horizontal">--}}
+    {{--<img width="973px" src="{{ $cdn }}/sales/ny_2018_discountx2.jpg" alt="Скидка в 2 раза больше">--}}
+    {{--</div>--}}
 
-                <div class="top-15 font-s13">
-                    <p>Обращаем ваше внимание на то, что данный интернет-сайт носит исключительно информационный характер и ни при каких условиях не является публичной офертой, определяемой положениями Статьи 437 Гражданского кодекса РФ.</p>
-                    
+    @yield('content')
+
+</div>
+
+<div class="footer">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="footer__copyright">
+                    <p class="arial font-s16 font-w600 text-white">2012-{{ date('Y') }} © Глюкоза</p>
+                    <p class="arial font-s16 font-w600 text-white">Медтехника и товары для контроля диабета</p>
+                    <p class="text-white">Магазин медицинской техники в Санкт-Петербурге, доставка по всей России.</p>
+                    <p class="text-white">ООО «Сингер-Мед».</p>
                 </div>
             </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="footer__title">Покупателям</div>
+                <div class="footer__links">
+                    <a href="/beznal">Для юридических лиц</a>
+                    <a href="/dostavka">Доставка и самовывоз</a>
+                    <a href="/oplata">Способы оплаты</a>
+                    <a href="/kontakty">Контакты и адреса магазинов</a>
+                    <a href="/vozvrat">Условия возврата</a>
+
+
+                    <a href="/card-payment">Оплата банковскими картами</a>
+                    <a href="/category/aktsii">Акции</a>
+                </div>
+                <div class="footer__title">Сервисы</div>
+                <div class="footer__links">
+                    <a href="/cabinet/auth_form">Личный кабинет</a>
+                    <a href="/track-orders">Отслеживание заказов</a>
+                    <a href="/bonusnaya-programma">Бонусная программа</a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="footer__title">Информация</div>
+                <div class="footer__links">
+                    <a href="/requisites">Реквизиты</a>
+                    <a href="/oferta">Публичная оферта</a>
+                    <a href="/kak-sdelat-zakaz">Как сделать заказ</a>
+                    <a href="/obratnaya-svyaz">Обратная связь</a>
+                    <a href="/otzyvy">Отзывы</a>
+                    <a href="/politika-konfidencialnosti">Политика конфиденциальности</a>
+                    <a class="font-lh110 top-3" href="/soglasie-na-obrabotku-pd">Пользовательское соглашение</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer__cards text-center ptop-15">
+            <img src="{{ $cdn }}/cards_payment/footer-payment-types-bw.png" alt="Способы оплаты">
+        </div>
+
+        <div class="top-15 font-s13">
+            <p>Обращаем ваше внимание на то, что данный интернет-сайт носит исключительно информационный характер и ни при каких условиях не является публичной офертой, определяемой положениями Статьи 437 Гражданского кодекса РФ.</p>
 
         </div>
-        <div id="popUp"></div>
-        <div id="errorUp"></div>
-        <div id="dialog_bg"></div>
-        <div class="alerting"></div>
+    </div>
+
+</div>
+<div id="popUp"></div>
+<div id="errorUp"></div>
+<div id="dialog_bg"></div>
+<div class="alerting"></div>
 
 
 
 
-        {{-- Yandex.Metrika counter --}}
-        <script type="text/javascript"> (function(d, w, c) {
-                (w[c] = w[c] || []).push(function() {
-                    try {
-                        w.yaCounter23274694 = new Ya.Metrika2({
-                            id: 23274694,
-                            clickmap: true,
-                            trackLinks: true,
-                            accurateTrackBounce: true,
-                            webvisor: true,
-                            ecommerce: "dataLayer"
-                        });
-                    } catch (e) {
-                    }
+{{-- Yandex.Metrika counter --}}
+<script type="text/javascript"> (function(d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter23274694 = new Ya.Metrika2({
+                    id: 23274694,
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true,
+                    webvisor: true,
+                    ecommerce: "dataLayer"
                 });
-                var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function() {
-                    n.parentNode.insertBefore(s, n);
-                };
-                s.type = "text/javascript";
-                s.async = true;
-                s.src = "https://mc.yandex.ru/metrika/tag.js";
-                if (w.opera == "[object Opera]") {
-                    d.addEventListener("DOMContentLoaded", f, false);
-                } else {
-                    f();
-                }
-            })(document, window, "yandex_metrika_callbacks2"); </script>
-        <noscript>
-            <div><img src="https://mc.yandex.ru/watch/23274694" style="position:absolute; left:-9999px;" alt=""/></div>
-        </noscript>
-        {{-- /Yandex.Metrika counter --}}
+            } catch (e) {
+            }
+        });
+        var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function() {
+            n.parentNode.insertBefore(s, n);
+        };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/tag.js";
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else {
+            f();
+        }
+    })(document, window, "yandex_metrika_callbacks2"); </script>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/23274694" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
+{{-- /Yandex.Metrika counter --}}
 
-        <script>
-            window.LaravelToken = "{{ csrf_token() }}";
-            window.state = {
-                isMobile: window.matchMedia('all and (max-width: 767px)').matches
-            };
-            state.catalog = JSON.parse('{!! json_encode($cats) !!}');
-            state.catUrl = '{!! $cat_url !!}';
-            state.catLevelOneActive = false;
-            state.isExpandMenuOpened = false;
-            state.user_id = {!! session()->has('user') ? session()->get('user.id') : 'false' !!};
-            window.initialOrder = {!! session()->has('order') ? json_encode(session()->get('order')) : 'false' !!};
-            window.user_id = {!! session()->has('user') ? session()->get('user.id') : 'false' !!};
-        </script>
+<script>
+    window.LaravelToken = "{{ csrf_token() }}";
+    window.state = {
+        isMobile: window.matchMedia('all and (max-width: 767px)').matches
+    };
+    state.catalog = JSON.parse('{!! json_encode($cats) !!}');
+    state.catUrl = '{!! $cat_url !!}';
+    state.catLevelOneActive = false;
+    state.isExpandMenuOpened = false;
+    state.user_id = {!! session()->has('user') ? session()->get('user.id') : 'false' !!};
+    window.initialOrder = {!! session()->has('order') ? json_encode(session()->get('order')) : 'false' !!};
+    window.user_id = {!! session()->has('user') ? session()->get('user.id') : 'false' !!};
+</script>
 
-        <script src="/js/vendor/magnific-popup_1.0.0.min.js"></script>
-        <script src="/js/public/js/chunk-vendors.js"></script>
-        <script src="/js/public/js/app.js"></script>
-    </body>
+<script src="/js/vendor/magnific-popup_1.0.0.min.js"></script>
+<script src="/js/vendor/jquery-ui/jquery-ui.min.js"></script>
+<script src="/js/vendor/jquery.cookie.js"></script>
+<script src="/js/public/js/chunk-vendors.js"></script>
+<script src="/js/public/js/app.js"></script>
+<script src="/js/not_vue_interactive.js"></script>
+</body>
 </html>

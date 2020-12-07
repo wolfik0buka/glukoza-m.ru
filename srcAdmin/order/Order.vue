@@ -97,6 +97,7 @@
                                         <option :value=1 :key=1>Наличными при получении</option>
                                         <option :value=2 :key=2>Банковской картой на сайте</option>
                                         <option :value=3 :key=3>Картой при получении</option>
+                                        <option :value=4 :key=4>Банковской картой курьеру</option>
                                     </select>
                                 </td>
                             </tr>

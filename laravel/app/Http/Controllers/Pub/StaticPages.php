@@ -126,9 +126,15 @@ class StaticPages extends Controller
     }
 
 
-     public function pagePolitikaKonfidencialnosti(Request $request)
+    public function pagePolitikaKonfidencialnosti(Request $request)
     {
         $request->alias = 'privacy';
+        return $this->index($request);
+    }
+    
+    public function pageOrderInstruction(Request $request)
+    {
+        $request->alias = 'kak-sdelat-zakaz';
         return $this->index($request);
     }
 }
