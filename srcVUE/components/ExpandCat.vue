@@ -3,7 +3,6 @@
         <div
             class="expandCat__button"
             @click="toggleMenu"
-            @mouseover="toggleMenu"
             :class="{ opened: isOpened }"
         >
             <template v-if="!isMobile">
@@ -31,11 +30,11 @@
                 v-if="isOpened"
                 class="expandCat__menu"
                 :class="{ fixed: fixed }"
-                v-on-clickaway="closeMenu"
+                v-on-clickaway="toggleMenu"
             >
                 <div class="expandCat__level1">
                     <div v-if="isMobile" class="title">Каталог</div>
-                    <div v-if="isMobile" @click="closeMenu" class="close">
+                    <div v-if="isMobile" @click="toggleMenu" class="close">
                         <i class="fa fa-times"></i>
                     </div>
                     <expand-cat-item
@@ -82,10 +81,10 @@ module.exports = {
             _ym.goal("expandcat");
         },
         showMenu() {
-            // if (!this.isOpened) { this.isOpened = true }
+            if (!this.isOpened && !this.isMobile) { this.isOpened = true }
         },
         closeMenu() {
-            // if (this.isOpened) { this.isOpened = false }
+            if (this.isOpened && !this.isMobile) { this.isOpened = false }
         },
         checkMobile() {
             this.isMobile = window.matchMedia(
