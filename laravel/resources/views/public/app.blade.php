@@ -216,7 +216,7 @@
                         Время работы:
                         {{-- getSettings('headerWorkTime') --}}
                         пн-пт: 10:00 до 20:00 <br>
-                        сб-вс с 10:00 до 19:00
+                        сб-вс с 10:00 до 19:00 <br>
                         <br>
                     </div>
                     <div class="headerContacts__contactLink">
@@ -237,11 +237,21 @@
                 </div>
 
             </div>
+
         </div>
 
         <div class="headerNavContainer">
             <header-nav></header-nav>
         </div>
+                <div class="container">
+                    <div class="holiday" style="padding: 5px 0 25px; text-align: center">
+                        <h3>Временное расписание</h3>
+                        <strong>31.12-03.01</strong> выходной <br>
+                        <strong>04.01-06.01</strong> с 10 до 17<br>
+                        <strong>07.01</strong> выходной
+                    </div>
+                </div>
+
 
     </div>
 
