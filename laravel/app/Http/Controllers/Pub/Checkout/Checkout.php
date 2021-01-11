@@ -208,7 +208,7 @@ class Checkout extends Controller
     {
         (new SmsSender)
             ->setPhone($this->order_model->phone)
-            ->setMessage('Спасибо за заказ. Сумма: '.$this->sum_full.' руб. Ждите звонка или смс.')
+            ->setMessage('Спасибо за заказ. Сумма: '.$this->sum_full.' руб. Ждите звонка или смс. Магазин Глюкоза.')
             ->send();
     }
 
