@@ -58,10 +58,11 @@ class Seo extends Controller
     public function setModel()
     {
         try {
+            $clear_url = explode('?_openstat', $this->url)[0];
+            $clear_url = substr($clear_url, 0, 250);
             $model = SeoModel::firstOrCreate([
-                'url' => str_replace(['http://glukoza-med.local', 'http://glukoza-med.ru', 'https://glukoza-med.local', 'https://glukoza-med.ru'], '', $this->url),
+                'url' => str_replace(['http://glukoza-med.local', 'http://glukoza-med.ru', 'https://glukoza-med.local', 'https://glukoza-med.ru'], '', $clear_url),
             ]);
-
             !is_null($model->title) ? $this->items['title'] = $model->title : null;
             !is_null($model->description) ? $this->items['description'] = $model->description : null;
             !is_null($model->keywords) ? $this->items['keywords'] = $model->keywords : null;
