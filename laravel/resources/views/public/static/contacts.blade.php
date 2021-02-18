@@ -42,7 +42,7 @@
                                         Санкт-Петербург, Улица Сикейроса, дом 10, корпус 4, литера А, ТК «Бульвар», секция 30.
                                     </p>
                                     <p>
-                                        <strong>Режим работы:</strong> <br> пн-пт: 10:00 до 20:00 <br>сб-вс с 10:00 до 19:00
+                                        <strong>Режим работы:</strong> <br> пн-пт: 10:00 до 20:00 <br>сб-вс: 10:00 до 19:00
                                     </p>
                                     <p><strong>Телефон:</strong> {{ getSettings('phone') }}</p>
                                     <p><strong>E-mail:</strong> <a href="mailto:shop@glukoza-med.ru">shop@glukoza-med.ru</a></p>
