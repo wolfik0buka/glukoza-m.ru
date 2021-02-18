@@ -219,7 +219,7 @@
                                 Время работы:
                                 {{-- getSettings('headerWorkTime') --}}
                                 пн-пт: 10:00 до 20:00 <br>
-                                сб-вс с 10:00 до 19:00 <br>
+                                сб-вс: 10:00 до 19:00 <br>
                                 <br>
                             </div>
                             <div class="headerContacts__contactLink">
