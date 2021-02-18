@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ru">
-<head>
+    <head>
     <meta charset="UTF-8">
     <meta name=viewport content="width=device-width, initial-scale=1">
     <meta name="yandex-verification" content="1c0682a1978c2dbf"/>
@@ -194,62 +194,61 @@
                             <div class="logo__slogan">Медицинская техника и&nbsp;товары для&nbsp;контроля&nbsp;диабета</div>
                         </div>
 
-
-                <div class="headerSocial hidden-xs hidden-sm">
-                    <div class="headerSocial__link" onclick="App.openInNewTab('https://vk.com/glukozamed')">
-                        <i class="fa fa-vk"></i>
-                    </div>
-                    <div class="headerSocial__link" onclick="App.openInNewTab('https://instagram.com/glukoza_med?igshid=1ptlogabzzkbp')">
-                        <i class="fa fa-instagram"></i>
-                    </div>
-                </div>
-
-                <div class="headerContacts">
-                    <div class="headerContacts__phone">
-                        <a
-                                type="tel"
-                                href="tel:{{ str_replace([" ", "-", "(", ")"], "", getSettings('phone')) }}">
-                            {{ getSettings('phone') }}
-                        </a>
-                    </div>
-                    <div class="headerContacts__worktime">
-                        Время работы:
-                        {{-- getSettings('headerWorkTime') --}}
-                        пн-пт: 10:00 до 20:00 <br>
-                        сб-вс с 10:00 до 19:00 <br>
-                        <br>
-                    </div>
-                    <div class="headerContacts__contactLink">
-                        Ваш город
-                        <div class="dropdown">
-                            <a  data-toggle="dropdown" role="button">
-                                <span class="do_set_city_value">{{$city}}</span>
-                                <i class="fa fa-angle-down"></i>
-                            </a>
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                <li role="presentation" class="do_toggle_city"><a  role="menuitem" tabindex="-1" >Санкт-Петербург</a></li>
-                                <li role="presentation"class="do_toggle_city"><a role="menuitem" tabindex="-1" >Москва</a></li>
-                            </ul>
+                        <div class="headerSocial hidden-xs hidden-sm">
+                            <div class="headerSocial__link" onclick="App.openInNewTab('https://vk.com/glukozamed')">
+                                <i class="fa fa-vk"></i>
+                            </div>
+                            <div class="headerSocial__link" onclick="App.openInNewTab('https://instagram.com/glukoza_med?igshid=1ptlogabzzkbp')">
+                                <i class="fa fa-instagram"></i>
+                            </div>
                         </div>
-                    </div>
 
+                        <div class="headerRating">
+                            <a href="https://clck.yandex.ru/redir/dtype=stred/pid=47/cid=73582/path=dynamic.88x31/*https://market.yandex.ru/shop--magazin-medtekhniki-gliukoza/544312/reviews"> <img src="https://clck.yandex.ru/redir/dtype=stred/pid=47/cid=73581/path=dynamic.88x31/*https://grade.market.yandex.ru/?id=544312&action=image&size=0" border="0" alt="Читайте отзывы покупателей и оценивайте качество магазина Магазин медтехники ГЛЮКОЗА на Яндекс.Маркете" /> </a>
+                        </div>
+
+                        <div class="headerContacts">
+                            <div class="headerContacts__phone">
+                                <a
+                                        type="tel"
+                                        href="tel:{{ str_replace([" ", "-", "(", ")"], "", getSettings('phone')) }}">
+                                    {{ getSettings('phone') }}
+                                </a>
+                            </div>
+                            <div class="headerContacts__worktime">
+                                Время работы:
+                                {{-- getSettings('headerWorkTime') --}}
+                                пн-пт: 10:00 до 20:00 <br>
+                                сб-вс с 10:00 до 19:00 <br>
+                                <br>
+                            </div>
+                            <div class="headerContacts__contactLink">
+                                Ваш город
+                                <div class="dropdown">
+                                    <a  data-toggle="dropdown" role="button">
+                                        <span class="do_set_city_value">{{$city}}</span>
+                                        <i class="fa fa-angle-down"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <li role="presentation" class="do_toggle_city"><a  role="menuitem" tabindex="-1" >Санкт-Петербург</a></li>
+                                        <li role="presentation"class="do_toggle_city"><a role="menuitem" tabindex="-1" >Москва</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                     </div>
 
                 </div>
 
+                <div class="headerNavContainer">
+                    <header-nav></header-nav>
+                </div>
             </div>
 
-        </div>
-
-        <div class="headerNavContainer">
-            <header-nav></header-nav>
-        </div>
-    </div>
-
-    {{--<div class="bg-white text-center hidden-xs hidden-sm hidden-md ptop-15 pbottom-15 sale__horizontal">--}}
-    {{--<img width="973px" src="{{ $cdn }}/sales/ny_2018_discountx2.jpg" alt="Скидка в 2 раза больше">--}}
-    {{--</div>--}}
-
-    @yield('content')
+            @yield('content')
 
 </div>
 
