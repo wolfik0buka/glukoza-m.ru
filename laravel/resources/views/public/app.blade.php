@@ -221,7 +221,10 @@
                                 пн-пт: 10:00 до 20:00 <br>
                                 сб-вс: 10:00 до 19:00 <br>
                                 <br>
+                                Находимся в <strong>Санкт-Петербурге</strong><br>
+                                Доставляем по <strong>всей России</strong>
                             </div>
+                            {{--
                             <div class="headerContacts__contactLink">
                                 Ваш город
                                 <div class="dropdown">
@@ -235,6 +238,7 @@
                                     </ul>
                                 </div>
                             </div>
+                            --}}
 
 
                         </div>
