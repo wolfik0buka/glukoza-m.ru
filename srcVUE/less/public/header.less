@@ -90,14 +90,18 @@
             }
         }
     }
+    &Rating{
+        flex:none;
+        width: 88px;
+        margin: 0 25px;
+    }
     &Social{
-        float:left;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;
         height: 32px;
-        width: 240px;
+        width: 145px;
         margin-left: -6px;
         &__link{
             display: flex;
@@ -260,5 +264,11 @@
     }
     &:last-of-type{
         margin-right: -15px;
+    }
+}
+
+@media @md {
+    .headerRating{
+        margin: 15px 0;
     }
 }
