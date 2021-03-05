@@ -30,9 +30,9 @@ class AddFieldsToResponses extends Migration
     public function down()
     {
         //
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('responses', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
-            $table->dropColumn('rating', 'confirmed', 'deleted', ' user');
+            $table->dropColumn(['rating', 'confirmed', 'deleted', ' user_id']);
         });
     }
 }

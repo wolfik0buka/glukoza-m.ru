@@ -79,7 +79,7 @@ export default  {
             });
         },
         getResponses(store) {
-            axios.post(host + `/admin/responses/all`).then(response => {
+            axios.get(host + `/admin/responses/all`).then(response => {
                 store.commit("setResponses", response.data);
             });
         },
