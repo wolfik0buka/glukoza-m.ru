@@ -7,6 +7,7 @@ if ($page !== "collections"
     && $page !== "orders"
     && $page !== "order"
     && $page !== "reports"
+    && $page !== "responses"
     && !($page==='nom' && isset($_GET['id']) )
 ) {
     include '../php/mysqlconnect_new.php';
@@ -82,6 +83,8 @@ if ($page !== "collections"
                         echo '<div id="app"><product :product_id="'.$_GET['id'].'"></product></div>';
                     } elseif ($page == 'nom' && !isset($_GET['id'])) {
                         echo '<div id="app"><products></products></div>';
+                    } elseif ($page == 'responses' && !isset($_GET['responses'])) {
+                        echo '<div id="app">Отзывы</div>';
                     } else {
                         $x = '\\App\\'.$page;
                         $panel = new $x();
@@ -99,6 +102,7 @@ if ($page !== "collections"
             <a class="itemnav" href="/admin_new/index.php?page=orders"><span>Заказы</span></a>
             <a class="itemnav" href="/admin_new/index.php?page=users"><span>Клиенты</span></a>
             <a class="itemnav" href="/admin_new/index.php?page=statica"><span>Страницы</span></a>
+            <a class="itemnav" href="/admin_new/index.php?page=responses"><span>Отзывы</span></a>
             <a class="itemnav" href="/admin_new/index.php?page=arc"><span>Архив</span></a>
             <a class="itemnav" href="/admin_new/index.php?page=obmen"><span>Выгрузка 1С</span></a>
             <a class="itemnav" href="/admin_new/index.php?page=podzakaz"><span>Под заказ</span></a>
