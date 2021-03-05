@@ -26,7 +26,7 @@ export default  {
         setProducts(state, products) {
             state.products = products;
         },
-        setProducts(state, responses) {
+        setResponses(state, responses) {
             state.responses = responses;
         },
         addProductToOrder(state, payload) {

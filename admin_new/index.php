@@ -1,7 +1,9 @@
 <?php namespace App;
 
 $page = 'nom';
-if (isset($_GET['page'])) $page = $_GET['page'];
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+}
 
 if ($page !== "collections"
     && $page !== "orders"
@@ -55,8 +57,7 @@ if ($page !== "collections"
         && $page != 'order'
         && $page != 'responses')
         ? '<script src="/admin_new/' . $page . '/java.js?ver=304"></script>'
-        : '';
-    ?>
+        : '';?>
 
     <?= ($page === 'order') ? '<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>' : '' ?>
 </head>
