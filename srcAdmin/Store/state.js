@@ -70,6 +70,7 @@ module.exports = {
     productsFilters: storage.get("productsFilters"),
     settings: storage.get("settings"),
     products: [],
+    responses: [],
     product: false,
     order: false,
     orderCancelReasons: [],

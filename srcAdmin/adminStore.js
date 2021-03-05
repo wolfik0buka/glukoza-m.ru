@@ -26,6 +26,9 @@ export default  {
         setProducts(state, products) {
             state.products = products;
         },
+        setProducts(state, responses) {
+            state.responses = responses;
+        },
         addProductToOrder(state, payload) {
             state.order.product_links.push(payload);
         },
@@ -75,6 +78,12 @@ export default  {
                 store.commit("setProducts", response.data);
             });
         },
+        getResponses(store) {
+            axios.post(host + `/admin/responses/all`).then(response => {
+                store.commit("setResponses", response.data);
+            });
+        },
+
         addProduct(store, product) {
             axios.post(host + "/admin/products/add", product).then(response => {
                 window.location.href = `/admin_new/index.php?page=nom&id=${response.data.product_id}`;

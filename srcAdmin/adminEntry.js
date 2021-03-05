@@ -93,7 +93,6 @@ Mess.init();
 window.VueScript2 = require("vue-script2/dist/vue-script2.min");
 
 import axios from "axios";
-//axios.defaults.headers.common["X-CSRF-TOKEN"] = document.querySelector("meta[name="csrf-token"]").getAttribute("content")
 window.axios = axios;
 
 require("vue-wysiwyg/dist/vueWysiwyg.css");
@@ -234,6 +233,7 @@ import('./adminVendor.js').then(function(vendor) {
     Vue.component("numberSpin", require("../srcVUE/components/numberSpin.vue").default);
     Vue.component("priceEditor", require("../srcVUE/components/priceEditor.vue").default);
     Vue.component("textEditor", require("../srcVUE/components/textEditor.vue").default);
+    Vue.component("modal", require("../srcVUE/components/Modal.vue").default);
     Vue.component("order", require("./order/Order.vue").default);
     Vue.component("point-selector", require("./order/PointSelector.vue").default);
     Vue.component("page-sklad", require("./sklad/pageSklad.vue").default);
@@ -244,7 +244,7 @@ import('./adminVendor.js').then(function(vendor) {
     Vue.component("products", require("./products/Products.vue").default);
     Vue.component("single-upload", require("./singleUpload.vue").default);
     Vue.component("control-select", require("./selectControl.vue").default);
-    Vue.component("modal", require("../srcVUE/components/Modal.vue").default);
+    Vue.component("responces", require("./responses/Responses.vue").default);
 
 
     App.instance = new Vue({

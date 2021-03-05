@@ -52,7 +52,8 @@ if ($page !== "collections"
     ($page != 'collections'
         && $page != 'orders'
         && $page != 'reports'
-        && $page != 'order')
+        && $page != 'order'
+        && $page != 'responses')
         ? '<script src="/admin_new/' . $page . '/java.js?ver=304"></script>'
         : '';
     ?>
@@ -84,7 +85,7 @@ if ($page !== "collections"
                     } elseif ($page == 'nom' && !isset($_GET['id'])) {
                         echo '<div id="app"><products></products></div>';
                     } elseif ($page == 'responses' && !isset($_GET['responses'])) {
-                        echo '<div id="app">Отзывы</div>';
+                        echo '<div id="app"><responces></responces></div>';
                     } else {
                         $x = '\\App\\'.$page;
                         $panel = new $x();
