@@ -29,6 +29,9 @@ export default  {
         setResponses(state, responses) {
             state.responses = responses;
         },
+        setResponses(state, response) {
+            state.response = response;
+        },
         addProductToOrder(state, payload) {
             state.order.product_links.push(payload);
         },
@@ -78,11 +81,7 @@ export default  {
                 store.commit("setProducts", response.data);
             });
         },
-        getResponses(store) {
-            axios.get(host + `/admin/responses/all`).then(response => {
-                store.commit("setResponses", response.data);
-            });
-        },
+        
 
         addProduct(store, product) {
             axios.post(host + "/admin/products/add", product).then(response => {
@@ -424,6 +423,16 @@ export default  {
                         reject();
                     });
                 }
+            });
+        },
+        getResponses(store) {
+            axios.get(host + `/admin/responses/all`).then(response => {
+                store.commit("setResponses", response.data);
+            });
+        },
+        getResponse(store, id) {
+            axios.post(host +`/admin/products/` + id).then(response => {
+                store.commit("setResponse", response.data);
             });
         },
         updateResponse(store, response){

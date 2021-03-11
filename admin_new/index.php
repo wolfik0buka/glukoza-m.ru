@@ -10,8 +10,10 @@ if ($page !== "collections"
     && $page !== "order"
     && $page !== "reports"
     && $page !== "responses"
+    && $page !== "response"
     && !($page==='nom' && isset($_GET['id']) )
 ) {
+
     include '../php/mysqlconnect_new.php';
     include $page . '/editor.php';
 }
@@ -55,7 +57,8 @@ if ($page !== "collections"
         && $page != 'orders'
         && $page != 'reports'
         && $page != 'order'
-        && $page != 'responses')
+        && $page != 'responses'
+        && $page != 'response')
         ? '<script src="/admin_new/' . $page . '/java.js?ver=304"></script>'
         : '';?>
 
@@ -87,6 +90,8 @@ if ($page !== "collections"
                         echo '<div id="app"><products></products></div>';
                     } elseif ($page == 'responses' && !isset($_GET['responses'])) {
                         echo '<div id="app"><responces></responces></div>';
+                    } elseif ($page == 'response' && isset($_GET['id'])) {
+                        echo '<div id="app"><response :response_id="'.$_GET['id'].'"></response></div>';
                     } else {
                         $x = '\\App\\'.$page;
                         $panel = new $x();
@@ -116,7 +121,10 @@ if ($page !== "collections"
 </div>
 <div id="popup"></div>
 <div id="dialog_bg"></div>
-<input type="hidden" id="currentPage" value="<?php if (isset($panel->current_page)) {echo $panel->current_page;} ?>">
+<input type="hidden" id="currentPage" value="<?php
+if (isset($panel->current_page)) {
+    echo $panel->current_page;
+} ?>">
 <?php
 if (isset($_GET['str'])) echo '<input type="hidden" id="str" value="' . $_GET['str'] . '">';
 if (isset($_GET['sklad'])) echo '<input type="hidden" id="sklad" value="1">'; else echo '<input type="hidden" id="sklad" value="0">';

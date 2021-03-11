@@ -245,6 +245,7 @@ import('./adminVendor.js').then(function(vendor) {
     Vue.component("single-upload", require("./singleUpload.vue").default);
     Vue.component("control-select", require("./selectControl.vue").default);
     Vue.component("responces", require("./responses/Responses.vue").default);
+    Vue.component("response", require("./responses/Response.vue").default);
 
 
     App.instance = new Vue({

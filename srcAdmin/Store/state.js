@@ -72,6 +72,7 @@ module.exports = {
     products: [],
     responses: [],
     product: false,
+    response: false,
     order: false,
     orderCancelReasons: [],
     sberbankOrderStatus: false,
