@@ -15,7 +15,7 @@
                 <a href="/bonusnaya-programma">Бонусная программа</a>
                 <a href="/track-orders" title="Отслеживание заказов">Отслеживание</a>
                 <div class="text-muted top-10 font-s13 font-lh140">Напишите нам</div>
-                <a href="mailto:glukoza@glukoza-med.ru">glukoza@glukoza-med.ru</a>
+                <a href="mailto:glukoza@glukoza-med.ru">shop@glukoza-med.ru</a>
             </div>
         </div>
 
