@@ -1,12 +1,11 @@
 <?php namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Model;
-
 
 class Response extends Model
 {
     protected $table = 'responses';
+    public $timestamps = false;
     
     protected $dates = [
         'created_at',
@@ -17,4 +16,8 @@ class Response extends Model
         return $this->created_at->diffForHumans();
     }
 
+    public function linked_tovar()
+    {
+        return $this->belongsTo('App\Models\Tovar', 'tovar_id');
+    }
 }

@@ -136,7 +136,7 @@ Route::group(['namespace' => 'Admin'], function () {
         });
         Route::group(['prefix' => 'responses'], function () {
             Route::get('/all', 'Responses@getAll');
-
+            Route::post('/update', 'Responses@update');
         });
         Route::group(['prefix' => 'order-cancellation-reasons'], function () {
             Route::post('/', 'OrderCancelReasons@index');

@@ -25,7 +25,7 @@
                             ID
                         </div>
                         <div class="responses__col responses__col_tovar">
-                            ФИО
+                            Товар
                         </div>
                         <div class="responses__col responses__col_fio">
                             ФИО
@@ -34,13 +34,21 @@
                             Дата
                         </div>
                         <div class="responses__col responses__col_accept">
-                            Опубликовать
+                            Опублик.
                         </div>
                         <div class="responses__col responses__col_remove">
                             Удален
                         </div>
                     </div>
+                     <responsesResponse
+                        v-for="(response, index) in responses"
+                        :response="response"
+                        :confirm="confirmResponse"
+                        :delete="deleteResponse"
+                        :key="index">
+                    </responsesResponse>
                 </div>
+               
             </template>
             <template v-else>
                 <br>
@@ -53,7 +61,7 @@
             
         </div>
 
-        <div v-if="1" class="text-center mt-15">
+        <div v-if="visibleResponsesCount < responsesCount" class="text-center mt-15">
             <button class="btn btn-default">Показать еще 30</button>
         </div>
 
@@ -83,7 +91,28 @@
             
         },
         methods: {
+            confirmResponse(id,value){
+                const response = _.find(this.responses, (item) => item.id === id);
+                if (response) {
+                    response.confirmed = value;
+                    this.$store.dispatch("updateResponse", response);
+                } else {
+                    console.warn(`Отзыв с id=${id} не найден`);
+                }
+            },
+            deleteResponse(id,value){
+                const response = _.find(this.responses, (item) => item.id === id);
+                if (response) {
+                    response.deleted = value;
+                    this.$store.dispatch("updateResponse", response);
+                } else {
+                    console.warn(`Отзыв с id=${id} не найден`);
+                }
+            },
         
+        },
+        components: {
+            responsesResponse: require("./responsesResponse").default,
         },
         beforeMount() {
             this.$store.dispatch("getResponses");
@@ -96,11 +125,45 @@
         &__row{
             display: flex;
             justify-content: flex-start;
-            align-items: flex-start;
+            align-items: center;
             padding: 10px 0;
+            border-bottom: 1px solid #e3e3e3;
+            &_deleted{
+                color: #999;
+                a{
+                    color: #999;
+                }
+            }
         }
         &__head{
             font-weight: 700;
+        }
+        &__col{
+            text-align: center;
+            &_id{
+                flex: none;
+                width: 80px;
+            }
+            &_tovar{
+                text-align: left;
+                flex:1;
+            }
+            &_fio{
+                text-align: left;
+                flex:1;
+            }
+            &_date{
+                flex:none;
+                width: 170px;
+            }
+            &_accept{
+                flex:none;
+                width: 100px;
+            }
+            &_remove{
+                flex:none;
+                width: 100px;
+            }
         }
     }
 </style>

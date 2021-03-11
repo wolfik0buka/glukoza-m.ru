@@ -425,6 +425,13 @@ export default  {
                     });
                 }
             });
+        },
+        updateResponse(store, response){
+            axios.post(
+                "/admin/responses/update", response).
+                then(response => {
+                    store.dispatch("getResponses");
+                });
         }
     },
     getters: {
