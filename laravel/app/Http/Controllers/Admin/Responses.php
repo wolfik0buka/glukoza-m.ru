@@ -33,4 +33,11 @@ class Responses extends Controller
         }
     }
 
+    public function getSingle($id)
+    {
+        $response = Response::with('linked_tovar')
+            ->findOrFail($id);
+        return $response;
+    }
+
 }

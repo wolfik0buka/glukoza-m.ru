@@ -103,7 +103,7 @@
         beforeMount() {
             if (this.response_id > 0) {
                 console.log(this.response_id)
-                this.$store.dispatch('getProduct', this.response_id);
+                this.$store.dispatch('getResponse', this.response_id);
             }
         },
         components: {}

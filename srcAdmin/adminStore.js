@@ -431,7 +431,7 @@ export default  {
             });
         },
         getResponse(store, id) {
-            axios.post(host +`/admin/products/` + id).then(response => {
+            axios.post(host +`/admin/responses/` + id).then(response => {
                 store.commit("setResponse", response.data);
             });
         },
