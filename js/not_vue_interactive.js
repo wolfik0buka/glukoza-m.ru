@@ -78,4 +78,75 @@ $( function() {
         }
 
     });
+    $( "#product__tabs" ).tabs();
+    $('.responseForm__form').on('submit', function(e){
+        e.preventDefault();
+        var response =  $(this).serializeArray();
+        var errors = [];
+        var data = [];
+        var pers_data = false;
+        response.forEach(function (field) {
+            switch (field.name) {
+                case 'fio':
+                    if(!field.value.trim()){
+                        errors.push('Пожалуйста, заполните имя');
+                    }else{
+                        data.fio = field.value.trim();
+                    }
+                    break;
+                case 'response':
+                    if(!field.value.trim()){
+                        errors.push('Пожалуйста, напишите отзыв');
+                    }else{
+                        data.response = field.value.trim();
+                    }
+                    break;
+                case 'tovar_id':
+                    if(!field.value.trim()){
+                        errors.push('Произошла ошибка при отправке формы. Пожалуйста, попробуйте позднее.');
+                    }else{
+                        data.tovar_id = field.value.trim();
+                    }
+                    break;
+                case 'user_id':
+                    if(!field.value.trim()){
+                        errors.push('Произошла ошибка при отправке формы. Пожалуйста, попробуйте позднее.');
+                    }else{
+                        data.user_id = field.value.trim();
+                    }
+                    break;
+                case 'pers_data':
+                    pers_data = true;
+                    break;
+            }
+        });
+        if (!pers_data){
+            errors.push('Мы не сможем обработать ваш отзыв без вашего согласия.');
+        }
+        if (errors.length) {
+            var errorText = errors.join('<br>');
+            $(this).find('.responseForm__errors').html(errorText).css("display", "block");
+        } else {
+            $(this).find('.responseForm__errors').html('').css("display", "none");
+            $.ajax({
+                url: '/responses/add',
+                dataType: 'json',
+                method: 'post',
+                data: data,
+                success: function (response) {
+                    if(response.status === "added"){
+                        $('.responseForm__form').hide();
+                        $('.responseForm__succsess').
+                            text('Спасибо! Ваш отзыв будет опубликован после прохождения модерации.')
+                            .css("display", "block");
+                    } else {
+                        $('.responseForm__errors')
+                            .html('Извините, произошла ошибка при отправке')
+                            .css("display", "block");
+                    }
+                }
+            });
+        }
+        console.log(response);
+    })
 });

@@ -29,7 +29,7 @@ export default  {
         setResponses(state, responses) {
             state.responses = responses;
         },
-        setResponses(state, response) {
+        setResponse(state, response) {
             state.response = response;
         },
         addProductToOrder(state, payload) {

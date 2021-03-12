@@ -13,7 +13,6 @@ if ($page !== "collections"
     && $page !== "response"
     && !($page==='nom' && isset($_GET['id']) )
 ) {
-
     include '../php/mysqlconnect_new.php';
     include $page . '/editor.php';
 }

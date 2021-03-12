@@ -49,6 +49,7 @@ class Products extends Controller
             $product = Tovar::with([
                 'linksToCats',
                 'tovar_1c_att',
+                'responses',
                 'productProperties.name_property',
                 'relatedProducts.tovar_1c_att'
             ])
@@ -74,7 +75,10 @@ class Products extends Controller
             ->setTitle($product->name.' купить в Санкт-Петербурге')
             ->setH1($product->name)
             ->all();
-
+        $product->responses = $product->responses->filter(function ($response) {
+            //var_export($response->confirmed and !$response->deleted);
+            return ($response->confirmed and !$response->deleted);
+        });
         if(isset($product->updated_at) and $product->updated_at->greaterThan(Carbon::create(2012, 9, 5, 23, 26, 11))){
             $last_modified = $product->updated_at->timezone('GMT')->format('D, d M Y H:i:s T');
             
@@ -95,7 +99,7 @@ class Products extends Controller
 
             }
         }
-
+        
         return view('public.product.page_product', compact('product', 'cat', 'related', 'canonical', 'seo'));
     }
 

@@ -1,7 +1,5 @@
 <div class="top-40">
 
-    <h3>Доставка и самовывоз</h3>
-
     <h4 id="anchor_spb" class="font-w600 arial font-s15 top-20">г. Санкт-Петербург</h4>
 
     <table class="deliveryTable">

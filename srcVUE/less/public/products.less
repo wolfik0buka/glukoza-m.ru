@@ -173,3 +173,31 @@
 
     }
 }
+
+.ui-tabs{
+    border:none;
+    padding: 0;
+    .ui-tabs-nav{
+        padding: 0;
+        background: #fff;
+        border: none;
+        li{
+            background: #ececec;
+            border:1px solid #ececec;
+            a{
+                width: 100%;
+            }
+            @media @xs{
+                width: 100%;
+            }
+            &.ui-tabs-active{
+                background: #fff;
+                border-bottom: none;
+            }
+        }
+    }
+    .ui-tabs-panel{
+        display: block;
+        border: 1px solid #ececec;
+    }
+}
