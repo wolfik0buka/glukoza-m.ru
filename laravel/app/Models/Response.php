@@ -6,6 +6,9 @@ class Response extends Model
 {
     protected $table = 'responses';
     public $timestamps = false;
+    protected $guarded = [
+        'id',
+      ];
     
     protected $dates = [
         'created_at',

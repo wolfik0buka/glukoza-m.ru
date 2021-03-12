@@ -38,6 +38,10 @@ Route::group(['namespace' => 'Pub'], function () {
     
     Route::get('/otzyvy', 'Responses@getAll');
     
+    Route::group(['prefix' => 'responses'], function () {
+        Route::post('/add', 'Responses@add');
+    });
+    
     
     Route::get('/obratnaya-svyaz', 'Feedback@index');
     Route::post('/feedback-handler', 'Feedback@handler');

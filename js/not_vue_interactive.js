@@ -83,8 +83,9 @@ $( function() {
         e.preventDefault();
         var response =  $(this).serializeArray();
         var errors = [];
-        var data = [];
+        var data = {};
         var pers_data = false;
+
         response.forEach(function (field) {
             switch (field.name) {
                 case 'fio':
@@ -106,6 +107,13 @@ $( function() {
                         errors.push('Произошла ошибка при отправке формы. Пожалуйста, попробуйте позднее.');
                     }else{
                         data.tovar_id = field.value.trim();
+                    }
+                    break;
+                case 'rating':
+                    if(!field.value.trim()){
+                        errors.push('Произошла ошибка при отправке формы. Пожалуйста, попробуйте позднее.');
+                    }else{
+                        data.rating = field.value.trim();
                     }
                     break;
                 case 'user_id':
@@ -131,8 +139,9 @@ $( function() {
             $.ajax({
                 url: '/responses/add',
                 dataType: 'json',
+                contentType: "application/json",
                 method: 'post',
-                data: data,
+                data: JSON.stringify(data),
                 success: function (response) {
                     if(response.status === "added"){
                         $('.responseForm__form').hide();
@@ -140,6 +149,7 @@ $( function() {
                             text('Спасибо! Ваш отзыв будет опубликован после прохождения модерации.')
                             .css("display", "block");
                     } else {
+                         console.log('here2');
                         $('.responseForm__errors')
                             .html('Извините, произошла ошибка при отправке')
                             .css("display", "block");
@@ -147,6 +157,5 @@ $( function() {
                 }
             });
         }
-        console.log(response);
     })
 });
