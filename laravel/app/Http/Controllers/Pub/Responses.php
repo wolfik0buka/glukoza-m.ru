@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Response;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Mail;
 
 class Responses extends Controller
 {
@@ -43,7 +44,28 @@ class Responses extends Controller
         ]);
         $answer['status'] = 'added';
         $answer['response'] = $response;
-
+        Responses::sendNotification();
         return $answer;
+    }
+
+    static public function sendNotification()
+    {
+        
+        try {
+            $email = 'shop@glukoza-med.ru';
+            $email = 'molodoi_padavan@mail.ru';
+
+            Mail::send(
+                'public.mail.response',
+                [],
+                function ($message) {
+                    $message
+                        ->to('shop@glukoza-med.ru')
+                        ->subject('Добавлен новый отзыв на сайте glukoza-med.ru');
+                }
+            );
+        } catch (\Exception $ex) {
+            //
+        }
     }
 }
