@@ -173,9 +173,11 @@ Route::group(['namespace' => 'Admin'], function () {
             Route::post('/add', 'Products@add');
             Route::post('/update_cat_links', 'Products@updateCatLinks');
             Route::post('/search', 'Products@searchByName');
+            Route::post('/imageupload', 'Products@uploadPicDescription');
             Route::post('/{id}', 'Products@getSingle');
             Route::get('/{id}/clone', 'Products@clone');
             Route::post('/{id}/upload', 'Products@uploadPic');
+            
             Route::group(['prefix' => 'related'], function () {
                 Route::post('/add', 'ProductRelateds@add');
                 Route::post('/remove', 'ProductRelateds@remove');
