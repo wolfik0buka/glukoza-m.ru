@@ -58,7 +58,7 @@
                                             </div>
 
                                             <div class="top-20 bottom-15 col-xs-12" >
-                                                <input type="submit" class="btn btn-primary btn-mobile" value="Отправить">
+                                                <input type="submit" id="#responseSubmit" class="btn btn-primary btn-mobile" value="Отправить">
                                             </div>
                                         </div>
                                     </div>

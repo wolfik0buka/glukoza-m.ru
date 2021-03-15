@@ -38,6 +38,10 @@ Route::group(['namespace' => 'Pub'], function () {
     
     Route::get('/otzyvy', 'Responses@getAll');
     
+    Route::group(['prefix' => 'responses'], function () {
+        Route::post('/add', 'Responses@add');
+    });
+    
     
     Route::get('/obratnaya-svyaz', 'Feedback@index');
     Route::post('/feedback-handler', 'Feedback@handler');
@@ -133,6 +137,11 @@ Route::group(['namespace' => 'Admin'], function () {
                 Route::post('/update', 'OrderProducts@update');
                 Route::post('/add', 'OrderProducts@add');
             });
+        });
+        Route::group(['prefix' => 'responses'], function () {
+            Route::get('/all', 'Responses@getAll');
+            Route::post('/update', 'Responses@update');
+            Route::post('/{id}', 'Responses@getSingle');
         });
         Route::group(['prefix' => 'order-cancellation-reasons'], function () {
             Route::post('/', 'OrderCancelReasons@index');
