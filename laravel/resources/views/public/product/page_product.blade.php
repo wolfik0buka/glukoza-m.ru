@@ -91,11 +91,35 @@
 	             @endif
 	            <div class="container">
 	            	<div class="row">
-	                    <div class="col-sm-8 top-20">
-	                        @include('public.product._productDescription')
-	                        @include('public.product._productDelivery')
+	                    <div class="col-sm-12 top-20">
+                            <div id="product__tabs">
+                            <ul>
+                                @if(mb_strlen($product->description) > 5 || mb_strlen($product->desc_full) > 5)
+                                    <li><a href="#product_description"><span>Описание</span></a></li>
+                                @endif
+                                <li><a href="#product_delivery"><span>Доставка и самовывоз</span></a></li>
+
+                                <li><a href="#product_responses"><span>Отзывы</span></a></li>
+
+                            </ul>
+                            @if(mb_strlen($product->description) > 5 || mb_strlen($product->desc_full) > 5)
+                            <div id="product_description">
+                                @include('public.product._productDescription')
+                            </div>
+                            @endif
+                            
+                            <div id="product_delivery">
+                                @include('public.product._productDelivery')
+                            </div>
+                            <div id="product_responses">
+                                @include('public.product._productResponses')
+                            </div>
+                            </div>
+
+	                        
+	                        
 	                    </div>
-	                    <div class="col-sm-4"></div>
+	                    <!-- <div class="col-sm-4"></div> -->
 	                </div>
 	            </div>
             </div>

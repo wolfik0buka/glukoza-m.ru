@@ -2,13 +2,14 @@
 .response{
     &__head{
       display: flex;
-      justify-content: space-between;
+      justify-content:flex-start;
       align-items: center;
       padding: 10px 15px;
     }
     &__author{
       font-size: 18px;
       color: black;
+      flex:1;
     }
     &__body{
       padding: 10px 15px;
@@ -19,5 +20,64 @@
       color: white;
       font-size: 16px;
     }
+    &__rating{
+        margin: 0 10px;
+    }
+}
+.responseForm{
+    label{
+        font-weight: 400;
+    }
+    .form-control{
+        margin-top: 5px;
+    }
+    &__errors{
+        margin-top: 10px;
+        color: darkred;
+    }
+}
+.rating{
+    
+    color: gold;
+}
 
+.ratingForm {
+    overflow: hidden;
+    width: 135px;
+    margin: 5px 0;
+    &:not(:checked) > input {
+        display: none;
+    }
+    &:not(:checked) > label {
+        float: right;
+        width: 26px;
+        padding: 0;
+        cursor: pointer;
+        font-size: 24px;
+        line-height: 24px;
+        color: lightgrey;
+    }
+    &:not(:checked) > label {
+        float: right;
+        width: 26px;
+        padding: 0;
+        cursor: pointer;
+        font-size: 24px;
+        line-height: 24px;
+        color: lightgrey;
+    }
+    & > input:checked ~ label {
+        color: gold;
+    }
+    &:not(:checked) > label:hover,
+    &:not(:checked) > label:hover ~ label {
+        color: gold;
+    }
+    & > input:checked + label:hover,
+    & > input:checked + label:hover ~ label,
+    & > input:checked ~ label:hover,
+    & > input:checked ~ label:hover ~ label,
+    & > label:hover ~ input:checked ~ label {
+        color: gold;
+    }
 }

@@ -26,6 +26,12 @@ export default  {
         setProducts(state, products) {
             state.products = products;
         },
+        setResponses(state, responses) {
+            state.responses = responses;
+        },
+        setResponse(state, response) {
+            state.response = response;
+        },
         addProductToOrder(state, payload) {
             state.order.product_links.push(payload);
         },
@@ -75,6 +81,8 @@ export default  {
                 store.commit("setProducts", response.data);
             });
         },
+        
+
         addProduct(store, product) {
             axios.post(host + "/admin/products/add", product).then(response => {
                 window.location.href = `/admin_new/index.php?page=nom&id=${response.data.product_id}`;
@@ -416,6 +424,23 @@ export default  {
                     });
                 }
             });
+        },
+        getResponses(store) {
+            axios.get(host + `/admin/responses/all`).then(response => {
+                store.commit("setResponses", response.data);
+            });
+        },
+        getResponse(store, id) {
+            axios.post(host +`/admin/responses/` + id).then(response => {
+                store.commit("setResponse", response.data);
+            });
+        },
+        updateResponse(store, response){
+            axios.post(
+                "/admin/responses/update", response).
+                then(response => {
+                    store.dispatch("getResponses");
+                });
         }
     },
     getters: {

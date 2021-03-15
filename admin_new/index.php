@@ -1,12 +1,16 @@
 <?php namespace App;
 
 $page = 'nom';
-if (isset($_GET['page'])) $page = $_GET['page'];
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+}
 
 if ($page !== "collections"
     && $page !== "orders"
     && $page !== "order"
     && $page !== "reports"
+    && $page !== "responses"
+    && $page !== "response"
     && !($page==='nom' && isset($_GET['id']) )
 ) {
     include '../php/mysqlconnect_new.php';
@@ -51,10 +55,11 @@ if ($page !== "collections"
     ($page != 'collections'
         && $page != 'orders'
         && $page != 'reports'
-        && $page != 'order')
+        && $page != 'order'
+        && $page != 'responses'
+        && $page != 'response')
         ? '<script src="/admin_new/' . $page . '/java.js?ver=304"></script>'
-        : '';
-    ?>
+        : '';?>
 
     <?= ($page === 'order') ? '<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>' : '' ?>
 </head>
@@ -82,6 +87,10 @@ if ($page !== "collections"
                         echo '<div id="app"><product :product_id="'.$_GET['id'].'"></product></div>';
                     } elseif ($page == 'nom' && !isset($_GET['id'])) {
                         echo '<div id="app"><products></products></div>';
+                    } elseif ($page == 'responses' && !isset($_GET['responses'])) {
+                        echo '<div id="app"><responces></responces></div>';
+                    } elseif ($page == 'response' && isset($_GET['id'])) {
+                        echo '<div id="app"><response :response_id="'.$_GET['id'].'"></response></div>';
                     } else {
                         $x = '\\App\\'.$page;
                         $panel = new $x();
@@ -99,6 +108,7 @@ if ($page !== "collections"
             <a class="itemnav" href="/admin_new/index.php?page=orders"><span>Заказы</span></a>
             <a class="itemnav" href="/admin_new/index.php?page=users"><span>Клиенты</span></a>
             <a class="itemnav" href="/admin_new/index.php?page=statica"><span>Страницы</span></a>
+            <a class="itemnav" href="/admin_new/index.php?page=responses"><span>Отзывы</span></a>
             <a class="itemnav" href="/admin_new/index.php?page=arc"><span>Архив</span></a>
             <a class="itemnav" href="/admin_new/index.php?page=obmen"><span>Выгрузка 1С</span></a>
             <a class="itemnav" href="/admin_new/index.php?page=podzakaz"><span>Под заказ</span></a>
@@ -110,7 +120,10 @@ if ($page !== "collections"
 </div>
 <div id="popup"></div>
 <div id="dialog_bg"></div>
-<input type="hidden" id="currentPage" value="<?php if (isset($panel->current_page)) {echo $panel->current_page;} ?>">
+<input type="hidden" id="currentPage" value="<?php
+if (isset($panel->current_page)) {
+    echo $panel->current_page;
+} ?>">
 <?php
 if (isset($_GET['str'])) echo '<input type="hidden" id="str" value="' . $_GET['str'] . '">';
 if (isset($_GET['sklad'])) echo '<input type="hidden" id="sklad" value="1">'; else echo '<input type="hidden" id="sklad" value="0">';

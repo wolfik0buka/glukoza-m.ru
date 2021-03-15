@@ -135,6 +135,13 @@ class Tovar extends Model
       return $this
         ->belongsToMany('App\Models\PropertyLinkValue', 'property_link_tovar', 'id_tovar', 'id_value');
     }
+
+    public function responses()
+    {
+      return $this
+        ->hasMany('App\Models\Response');
+    }
+
     public function relatedProducts()
     {
 
