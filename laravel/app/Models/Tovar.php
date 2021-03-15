@@ -110,12 +110,13 @@ class Tovar extends Model
                   ->getPath();
             }
         }
-	if ( Storage::disk('local')
-          ->put('descriptions/' . $file->getClientOriginalName(), file_get_contents($path))) {
-		return 'https://cdn.glukoza-med.ru/descriptions/' . $file->getClientOriginalName();
-} else {
-return false;
-}
+        if (
+            Storage::disk('local')
+                ->put('descriptions/' . $file->getClientOriginalName(), file_get_contents($path))) {
+                return 'https://cdn.glukoza-med.ru/descriptions/' . $file->getClientOriginalName();
+        } else {
+            return false;
+        }
     }
 
 
