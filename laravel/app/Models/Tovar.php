@@ -92,6 +92,34 @@ class Tovar extends Model
           ->put('products/' . $this->attributes['id'] . '/orig.jpg', file_get_contents($path));
     }
 
+    public static function uploadPictureDescription($file)
+    {
+        if (is_string($file)) {
+            $path = Image::openFromUrl($file)
+              ->resize(1200, 1200)
+              ->save()
+              ->getPath();
+        } else {
+            try {
+                $path = Image::open($file)
+                  ->save()
+                  ->getPath();
+            } catch (NotReadableException $ex) {
+                $path = Image::openFromUrl($file)
+                  ->save()
+                  ->getPath();
+            }
+        }
+        if (
+            Storage::disk('local')
+                ->put('descriptions/' . $file->getClientOriginalName(), file_get_contents($path))) {
+                return 'https://cdn.glukoza-med.ru/descriptions/' . $file->getClientOriginalName();
+        } else {
+            return false;
+        }
+    }
+
+
 
     /**
      * Create all sizes of thumbs & upload to selectel

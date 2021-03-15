@@ -139,12 +139,16 @@ import('./adminVendor.js').then(function(vendor) {
         // modules: bold, italic, justifyLeft, justifyCenter, justifyRight, headings, orderedList, unorderedList, table, removeFormat
         hideModules: {
             code: true,
-            image: true,
-            link: true,
-            separator: true,
-            underline: true
+            // image: true,
+            // link: true,
+            // separator: true,
+            // underline: true
         },
-        forcePlainTextOnPaste: true
+        forcePlainTextOnPaste: true,
+        image: {
+            uploadURL: "/admin/products/imageupload",
+            dropzoneOptions: {}
+          },
     });
 
     window.eventbus = new Vue();

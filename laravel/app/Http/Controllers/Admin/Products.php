@@ -75,6 +75,19 @@ class Products extends Controller
         }
     }
 
+    public function uploadPicDescription(Request $request)
+    {
+        if ($request->file('file')) {
+
+            $link = Tovar::uploadPictureDescription($request->file('file'));
+
+            return $link;
+
+        } else {
+            return response()->json(['error' => true ], 200);
+        }
+    }
+
 
     public function getAll()
     {
