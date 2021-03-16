@@ -133,7 +133,6 @@ class Cats extends Controller
         $sort_base = explode('?',$_SERVER['REQUEST_URI'])[0] . '?';
         $params = $_GET;
 
-        
         $sort_links[] = array(
             'name' => 'По популярности',
             'slug' => 'popular',
@@ -155,11 +154,11 @@ class Cats extends Controller
             $sort_link['link'] = $sort_base . http_build_query($params);
         }
 
-        
-
         $cat->childs = $cat->childs->filter(function ($cat) {
             return $cat->products->count()  > 0 ? true : false;
         });
+
+        
         // Сео костыли:
         // Для определенной категории выводим дополнительный список ссылок
         // Перед товарами.

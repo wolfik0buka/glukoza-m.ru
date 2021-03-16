@@ -2,6 +2,15 @@
     <div class="@if(isset($card_size)) {{ $card_size }} @else col-sm-6 @endif remove-padding">
         <div class="product_card">
             <div class="product_wrap">
+                <div class="product__labels">
+                @if($product->is_sale)
+                    <span class="label label-danger">Акция</span>
+                @endif
+                @if($product->is_discont)
+                    <span class="label label-primary">Скидка</span>
+                @endif
+                </div>
+                
                 <div class="pic col-xs-4">
                     <a href="/product/{{ $product->symbol_code }}">
                         <img
@@ -30,6 +39,22 @@
 
                     @if((isset($product->tovar_1c_att->pres) && $product->tovar_1c_att->pres == 1) || ($product->podzakaz == 1))
                         <div class="product_price top-5">
+                            @if(isset($product->price_old) and ($product->price_old > 0))
+                            <div class="product_price__old">
+                                {{$product->price_old}}
+                            </div>
+                            <div class="product_price__value product_price__value-sale">
+                                <span class="font-s16 font-w500 bottom-10 text-nowrap">
+                                    <span class="hidden-xs">Цена </span>
+                                    @if($product->podzakaz == 1)
+                                        {{ $product->price }}
+                                    @else
+                                        {{ $product->tovar_1c_att->price }}
+                                    @endif
+                                    <span class="font-w400 font-s15"><i class="fa fa-rub"></i></span>
+                                </span>
+                            </div>
+                            @else
                             <div class="product_price__value">
                                 <span class="font-s16 font-w500 bottom-10 text-nowrap">
                                     <span class="hidden-xs">Цена </span>
@@ -41,6 +66,7 @@
                                     <span class="font-w400 font-s15"><i class="fa fa-rub"></i></span>
                                 </span>
                             </div>
+                            @endif
                             <add-to-basket :product-id="{{ $product->id }}"
                                            :price="{{ ($product->podzakaz == 1) ? $product->price : $product->tovar_1c_att->price }}"
                                            name="{{ $product->name }}"

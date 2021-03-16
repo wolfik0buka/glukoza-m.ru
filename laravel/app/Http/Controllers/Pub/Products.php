@@ -54,16 +54,11 @@ class Products extends Controller
                 'relatedProducts.tovar_1c_att'
             ])
                 ->where('del', 0)
-                ->where('symbol_code','=',$symbol_code)
+                ->where('symbol_code', '=', $symbol_code)
                 ->firstOrFail();
         } catch (ModelNotFoundException $ex) {
             app()->abort(404);
         }
-        // foreach ($product->productProperties as $productProperty) {
-        //     var_export( $productProperty->id_property);
-        //     var_export( $productProperty->value);
-        //     var_export( $productProperty->name_property->name);
-        // }
 
         $cat = self::getParentCatForProduct($product);
 

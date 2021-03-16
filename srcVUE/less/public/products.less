@@ -10,6 +10,11 @@
             height: auto;
             border: 1px solid #e8e5e5;
         }
+        .product__labels{
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
         .product_wrap{
             position: absolute;
             top: 0;
@@ -23,6 +28,7 @@
             max-height: 235зч;
             overflow: hidden;
             transition: .2s all ease;
+           
             @media @xs{
                 position: relative;
                 max-height: none;
@@ -99,8 +105,20 @@
                     display: flex;
                     flex-direction: column;
                     align-items: baseline;
+                    position: relative;
                     .product_price__value{
-                        margin-bottom: 10px
+                        margin-bottom: 10px;
+                        &-sale{
+                            color:#ed4b49;
+                        }
+                    }
+                    &__old{
+                        position: absolute;
+                        right: 15px;
+                        top: -10px;
+                        color: #888;
+                        font-size: 16px;
+                        text-decoration: line-through;
                     }
                 }
             }
