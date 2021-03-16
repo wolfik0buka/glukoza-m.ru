@@ -13,6 +13,7 @@
 	                <div class="row">
 	                    <div class="col-sm-8">
 	                        <h1>{{ isset($seo) ? $seo->h1 : $product->name }}</h1>
+
 	                        <div class="page_product__pics">
 	                            <img
 	                                src="{{ $cdn }}/products/{{ $product->id }}/md.jpg"
@@ -21,13 +22,27 @@
 	                    </div>
 	                    <div class="col-sm-4">
 	                        <div class="page_product__buyBlock">
+                                @if ($product->is_sale || $product->is_discont)
+                                <div class="product__labels bottom-10">
+                                    @if($product->is_sale)
+                                        <span class="label label-danger">Акция</span>
+                                    @endif
+                                    @if($product->is_discont)
+                                        <span class="label label-primary">Скидка</span>
+                                    @endif
+                                </div>
+                                @endif
 	                            @if((isset($product->tovar_1c_att->pres) && $product->tovar_1c_att->pres == 1) || ($product->podzakaz == 1))
 
 	                                <p class="text-muted font-s13">Артикул {{ str_pad($product->id, 5, '0', STR_PAD_LEFT) }}</p>
 
 	                                @if($product->podzakaz == 1)
 	                                    <div class="price">
-	                                        Цена <strong>{{ $product->price }}</strong> руб.
+	                                        Цена <strong>{{ $product->price }}</strong> 
+                                            @if ($product->price_old)
+                                                <span class="price__old">{{$product->price_old}}</span>
+                                            @endif
+                                            руб.
 	                                    </div>
 	                                @else
 	                                    <div class="price">

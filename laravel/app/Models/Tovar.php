@@ -30,6 +30,8 @@ class Tovar extends Model
       'src',
       'xs_src',
       'md_src',
+      'is_sale',
+      'is_discont',
     ];
 
     protected $thumbs_sizes = [
@@ -184,6 +186,7 @@ class Tovar extends Model
           ->hasMany('App\Models\LinkProductRelated', 'product_id', 'id');
     }
 
+    
 
     public function linksToCats()
     {
@@ -192,6 +195,25 @@ class Tovar extends Model
           ->where('del', 0);
     }
 
+    public function getIsSaleAttribute()
+    {
+        $links = $this->linksToCats;
+        $links = $links->filter(function ($link) {
+            //16 - id of category "Акции"
+            return $link->id_cat === 16;
+        });
+        return !!$links->count();
+    }
+
+    public function getIsDiscontAttribute()
+    {
+        $links = $this->linksToCats;
+        $links = $links->filter(function ($link) {
+            //41 - id of category "Дисконт"
+            return $link->id_cat === 41;
+        });
+        return !!$links->count();
+    }
 
     public function tovar_1c_att()
     {
