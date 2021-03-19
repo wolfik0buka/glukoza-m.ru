@@ -14,6 +14,7 @@ use App\Services\BonusSystem;
 use Swift_RfcComplianceException;
 use Input;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 use Mail;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -73,8 +74,14 @@ class Checkout extends Controller
 	}
 
 
-    public function doneOrder()
+    public function doneOrder(Request $request)
     {
+        $data = json_decode($request->getContent(), true);
+        file_put_contents(__DIR__ . '/order.log', date('Y-m-d H:i:s').' '. $_GET['data'].PHP_EOL, FILE_APPEND);
+        file_put_contents(__DIR__ . '/order.log', var_export($_SERVER, true) . PHP_EOL, FILE_APPEND);
+        file_put_contents(__DIR__ . '/order.log', var_export($data, true) . PHP_EOL, FILE_APPEND);
+        file_put_contents(__DIR__ . '/order.log', "=======================".PHP_EOL, FILE_APPEND);
+
         $this->createOrder();
         $this->addProductsToOrder();
         $this->addDeliveryProductToOrder();
