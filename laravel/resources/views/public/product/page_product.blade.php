@@ -39,7 +39,7 @@
 	                                @if($product->podzakaz == 1)
 	                                    <div class="price">
 	                                        Цена <strong>{{ $product->price }}</strong> 
-                                            @if ($product->price_old)
+                                            @if ($product->price_old and ($product->is_sale or $product->is_discont))
                                                 <span class="price__old">{{$product->price_old}}</span>
                                             @endif
                                             руб.

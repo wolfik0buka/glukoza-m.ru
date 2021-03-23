@@ -39,7 +39,7 @@
 
                     @if((isset($product->tovar_1c_att->pres) && $product->tovar_1c_att->pres == 1) || ($product->podzakaz == 1))
                         <div class="product_price top-5">
-                            @if(isset($product->price_old) and ($product->price_old > 0))
+                            @if(isset($product->price_old) and ($product->price_old > 0) and ($product->is_sale or $product->is_discont))
                             <div class="product_price__old">
                                 {{$product->price_old}}
                             </div>
