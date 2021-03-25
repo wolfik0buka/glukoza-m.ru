@@ -65,7 +65,7 @@ class Products extends Controller
         $canonical = '/product/' . $product->symbol_code;
 
         $related = self::getRelated($cat, $product);
-
+        $popular = self::getRandom($product);
         $seo = self::seo()
             ->setTitle($product->name.' купить в Санкт-Петербурге')
             ->setH1($product->name)
@@ -95,7 +95,7 @@ class Products extends Controller
             }
         }
         
-        return view('public.product.page_product', compact('product', 'cat', 'related', 'canonical', 'seo'));
+        return view('public.product.page_product', compact('product', 'cat', 'related', 'popular', 'canonical', 'seo'));
     }
 
 
@@ -121,7 +121,11 @@ class Products extends Controller
         return $cat;
     }
 
-
+    /**
+     * @param $product
+     * @param $cat,
+     * @return Collection
+     */
     public static function getRelated($cat, $product)
     {
         return Tovar::whereHas('linksToCats', function($q) use($cat) {
@@ -135,6 +139,23 @@ class Products extends Controller
                 return $product->is_available && !$product->del;
             })
             ->take(9);
+    }
+    /**
+     * @param $product
+     * @return Collection
+     */
+    public static function getRandom($product)
+    {
+        return Tovar::where('id', '!=', $product->id)
+            ->whereNotIn('id', $product->relatedProducts->pluck('id'))
+            ->with('tovar_1c_att')
+            ->orderByRaw('RAND()')
+            ->take(100)
+            ->get()
+            ->filter(function ($product) {
+                return $product->is_available && !$product->del;
+            })
+            ->take(rand(9, 12));
     }
 
 

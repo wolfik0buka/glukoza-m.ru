@@ -138,7 +138,23 @@
 	                </div>
 	            </div>
             </div>
+        </div>
+    </div>
 
+    <div class="container">
+        <div class="row top-30 bottom-40">
+            <div class="col-xs-12">
+                <div class="h2">
+                    Популярные товары
+                </div>
+            </div>
+            <div class="products">
+                <div class="col-xs-12">
+                    @foreach($popular as $product)
+                        @include('public.cats.product_card', ['product' => $product, 'card_size' => 'col-sm-6 col-md-4'])
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
 
