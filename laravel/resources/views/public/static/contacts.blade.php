@@ -63,7 +63,7 @@
                                     	<br>
                                     	<a href="mailto:tiv@glukoza-med.ru">tiv@glukoza-med.ru</a>
                                     	<br>
-                                    	<a href="skv@glukoza-med.ru">skv@glukoza-med.ru</a>
+                                    	<a href="mailto:skv@glukoza-med.ru">skv@glukoza-med.ru</a>
                                     </p>
                                 </div>
                                 <div class="col-xs-12">

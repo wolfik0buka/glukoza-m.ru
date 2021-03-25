@@ -25,8 +25,8 @@ class Products extends Controller
         } catch (ModelNotFoundException $ex) {
             app()->abort(404);
         }
-        if($product->symbol_code){
-            return redirect('https://glukoza-med.ru/product/' . $product->symbol_code, 301); 
+        if ($product->symbol_code) {
+            return redirect('https://glukoza-med.ru/product/' . $product->symbol_code, 301);
         }
 
         $cat = self::getParentCatForProduct($product);
@@ -65,7 +65,7 @@ class Products extends Controller
         $canonical = '/product/' . $product->symbol_code;
 
         $related = self::getRelated($cat, $product);
-
+        $popular = self::getRandom($product);
         $seo = self::seo()
             ->setTitle($product->name.' купить в Санкт-Петербурге')
             ->setH1($product->name)
@@ -74,28 +74,25 @@ class Products extends Controller
             //var_export($response->confirmed and !$response->deleted);
             return ($response->confirmed and !$response->deleted);
         });
-        if(isset($product->updated_at) and $product->updated_at->greaterThan(Carbon::create(2012, 9, 5, 23, 26, 11))){
+        if (isset($product->updated_at) and
+            $product->updated_at->greaterThan(Carbon::create(2012, 9, 5, 23, 26, 11))) {
             $last_modified = $product->updated_at->timezone('GMT')->format('D, d M Y H:i:s T');
             
-            if($request->headers->has('If-Modified-Since') and 
+            if ($request->headers->has('If-Modified-Since') and
                 Carbon::createFromFormat(
                     'D, d M Y H:i:s T',
                     $request->headers->get('If-Modified-Since')
-                )->greaterThanOrEqualTo($product->updated_at)
-            ){
-                
+                )->greaterThanOrEqualTo($product->updated_at)) {
                 header("HTTP/1.1 304 Not Modified", false);
-                header('Last-Modified: ' .  $last_modified, true , 304); 
+                header('Last-Modified: ' .  $last_modified, true, 304);
                 header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
                 exit;
-
-            }else{
-                header('Last-Modified: ' .  $last_modified);            
-
+            } else {
+                header('Last-Modified: ' .  $last_modified);
             }
         }
         
-        return view('public.product.page_product', compact('product', 'cat', 'related', 'canonical', 'seo'));
+        return view('public.product.page_product', compact('product', 'cat', 'related', 'popular', 'canonical', 'seo'));
     }
 
 
@@ -121,21 +118,40 @@ class Products extends Controller
         return $cat;
     }
 
-
+    /**
+     * @param $product
+     * @param $cat,
+     * @return Collection
+     */
     public static function getRelated($cat, $product)
     {
-        return Tovar::whereHas('linksToCats', function($q) use($cat) {
+        return Tovar::whereHas('linksToCats', function ($q) use ($cat) {
             $q->where('id_cat', $cat->id);
         })
             ->where('id', '!=', $product->id)
             ->whereNotIn('id', $product->relatedProducts->pluck('id'))
             ->with('tovar_1c_att')
             ->get()
-            ->filter(function($product) {
+            ->filter(function ($product) {
                 return $product->is_available && !$product->del;
             })
             ->take(9);
     }
-
-
+    /**
+     * @param $product
+     * @return Collection
+     */
+    public static function getRandom($product)
+    {
+        return Tovar::where('id', '!=', $product->id)
+            ->whereNotIn('id', $product->relatedProducts->pluck('id'))
+            ->with('tovar_1c_att')
+            ->orderByRaw('RAND()')
+            ->take(100)
+            ->get()
+            ->filter(function ($product) {
+                return $product->is_available && !$product->del;
+            })
+            ->take(rand(9, 12));
+    }
 }
