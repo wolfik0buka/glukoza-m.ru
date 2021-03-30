@@ -63,12 +63,11 @@ class Cats extends Controller
        
         $sort_by = isset($_GET['sort']) ? $_GET['sort'] : 'name';
         $sort_order = isset($_GET['order']) ? $_GET['order'] : 'asc';
-        if ($sort_order === 'asc') // Сортируем по имени
-        {
+        if ($sort_order === 'asc') { // Сортируем по имени
             switch ($sort_by) {
                 case 'price':
                     $cat->products = $cat->products
-                        ->map(function($product){
+                        ->map(function ($product) {
                             $product->sort = (isset($product->tovar_1c_att->price) and $product->is_available) ?
                                 $product->tovar_1c_att->price :
                                 9999999;
@@ -77,7 +76,7 @@ class Cats extends Controller
                     break;
                 case 'popular':
                     $cat->products = $cat->products
-                        ->map(function($product){
+                        ->map(function ($product) {
                             $product->sort = implode('-', [
                                 $product->is_available ? 0 : 1,
                                 $product->id
@@ -87,7 +86,7 @@ class Cats extends Controller
                     break;
                 default:
                     $cat->products = $cat->products
-                        ->map(function($product){
+                        ->map(function ($product) {
                             $product->sort = implode('-', [
                                 $product->is_available ? 0 : 1,
                                 $product->name
@@ -95,13 +94,12 @@ class Cats extends Controller
                             return $product;
                         })->sortBy('sort');
                     break;
-                    
             }
         } else {
             switch ($sort_by) {
                 case 'price':
                     $cat->products = $cat->products
-                        ->map(function($product){
+                        ->map(function ($product) {
                             $product->sort = (isset($product->tovar_1c_att->price) and $product->is_available) ?
                                 $product->tovar_1c_att->price :
                                 0;
@@ -110,7 +108,7 @@ class Cats extends Controller
                     break;
                 case 'popular':
                     $cat->products = $cat->products
-                        ->map(function($product){
+                        ->map(function ($product) {
                             $product->sort = implode('-', [
                                 $product->is_available ? 1 : 0,
                                 $product->id
@@ -120,7 +118,7 @@ class Cats extends Controller
                     break;
                 default:
                     $cat->products = $cat->products
-                        ->map(function($product){
+                        ->map(function ($product) {
                             $product->sort = implode('-', [
                                 $product->is_available ? 1 : 0,
                                 $product->name
@@ -130,7 +128,7 @@ class Cats extends Controller
                     break;
             }
         }
-        $sort_base = explode('?',$_SERVER['REQUEST_URI'])[0] . '?';
+        $sort_base = explode('?', $_SERVER['REQUEST_URI'])[0] . '?';
         $params = $_GET;
 
         $sort_links[] = array(
@@ -148,7 +146,7 @@ class Cats extends Controller
             'slug' => 'price',
             'order' => ($sort_by === 'popular' and $sort_order === 'asc') ? 'desc' : 'asc'
         );
-        foreach ($sort_links as &$sort_link){
+        foreach ($sort_links as &$sort_link) {
             $params['sort'] = $sort_link['slug'];
             $params['order'] = ($sort_by === $sort_link['slug'] and $sort_order === 'asc') ? 'desc' : 'asc';
             $sort_link['link'] = $sort_base . http_build_query($params);
@@ -205,7 +203,7 @@ class Cats extends Controller
             }
             
             $cat->products = $cat->products
-                ->filter(function($product) use ($filter_props, &$filter ) {
+                ->filter(function ($product) use ($filter_props, &$filter) {
                     $props = array();
                     foreach ($product->productProperties as $property) {
                         $props[$property->name_property->slug][] = $property->slug;
@@ -214,18 +212,21 @@ class Cats extends Controller
                         if ($prop_slug === 'price') {
                             $bool_max_price = false;
                             $bool_min_price = false;
-                            if (isset($prop_values['to']) and intval($prop_values['to']) < $filter['props']['price']['items']['max'] ) {
+                            if (isset($prop_values['to']) and intval($prop_values['to']) < $filter['props']['price']['items']['max']) {
                                 $filter['props']['price']['items']['cur_max'] = $prop_values['to'];
                                 $bool_max_price = true;
                             }
                             
-                            if (isset($prop_values['from']) and intval($prop_values['from']) > $filter['props']['price']['items']['min'] ) {
+                            if (isset($prop_values['from']) and intval($prop_values['from']) > $filter['props']['price']['items']['min']) {
                                 $filter['props']['price']['items']['cur_min'] = $prop_values['from'];
                                 $bool_min_price = true;
                             }
                             if ($bool_max_price or $bool_min_price) {
-                                if (isset($product->tovar_1c_att->price)) {
-                                    $cur_price = intval($product->tovar_1c_att->price);
+                                if (isset($product->tovar_1c_att->price) or isset($product->price)) {
+                                    $cur_price = isset($product->tovar_1c_att->price) ?
+                                        intval($product->tovar_1c_att->price) :
+                                        intval($product->price) ;
+
                                     if (isset($prop_values['to']) and
                                         intval($prop_values['to']) < $cur_price) {
                                         return false;
@@ -235,15 +236,13 @@ class Cats extends Controller
                                         return false;
                                     }
         
-                                    if(!$product->is_available or $product->is_available == null){
+                                    if (!$product->is_available or $product->is_available == null) {
                                         return false;
                                     }
                                 } else {
                                     return false;
                                 }
                             }
-                           
-                            
                         } else {
                             if (!in_array($prop_slug, array_keys($props))) {
                                 return false;
@@ -254,7 +253,7 @@ class Cats extends Controller
                         }
                     }
                     return true;
-                });   
+                });
         }
 
         
@@ -272,7 +271,6 @@ class Cats extends Controller
         $filter_props = $_GET;
         $filter_props = array_filter($filter_props, function ($value, $slug) {
             if (strpos($slug, 'f_') !== false or $slug ==='price') {
-            
                 return true;
             }
             return false;
@@ -300,18 +298,21 @@ class Cats extends Controller
         return $filter_props;
     }
     
-    public static function get_filter_properties($products){
-        if($products->count() > 0){
+    public static function get_filter_properties($products)
+    {
+        if ($products->count() > 0) {
             $filter_properties = array();
             $filter_properties['price'] =array(
                 'name' => 'Цена',
                 'items' => array('min' => 99999, 'max' => 0)
             );
             foreach ($products as $product) {
-                
                 if (isset($product->tovar_1c_att->price) and $product->tovar_1c_att->price and $product->is_available) {
                     $temp_price = intval($product->tovar_1c_att->price);
-   
+                    $filter_properties['price']['items']['min'] = min($temp_price, $filter_properties['price']['items']['min']);
+                    $filter_properties['price']['items']['max'] = max($temp_price, $filter_properties['price']['items']['max']);
+                } elseif (isset($product->price)) {
+                    $temp_price = intval($product->price);
                     $filter_properties['price']['items']['min'] = min($temp_price, $filter_properties['price']['items']['min']);
                     $filter_properties['price']['items']['max'] = max($temp_price, $filter_properties['price']['items']['max']);
                 }
@@ -319,7 +320,7 @@ class Cats extends Controller
                 foreach ($product->productProperties as $product_property) {
                     $prop_slug = $product_property->name_property->slug;
                 
-                    if(!in_array($prop_slug, array_keys($filter_properties))){
+                    if (!in_array($prop_slug, array_keys($filter_properties))) {
                         $filter_properties[$prop_slug] = array(
                             'name' => $product_property->name_property->name,
                             'items' => array(),
@@ -341,12 +342,12 @@ class Cats extends Controller
             $filter_properties['price']['items']['cur_max'] = $filter_properties['price']['items']['max'];
             $filter_properties['price']['items']['cur_min'] = $filter_properties['price']['items']['min'];
     
-            if(count(array_keys($filter_properties)) > 1){
-               return array(
-                    'is_filter' => true,
-                    'props' => $filter_properties
-                );
-            } else{
+            if (count(array_keys($filter_properties)) > 1) {
+                return array(
+                        'is_filter' => true,
+                        'props' => $filter_properties
+                    );
+            } else {
                 return array(
                     'is_filter' => false,
                     'props' => array()
@@ -358,5 +359,4 @@ class Cats extends Controller
             'props' => array()
         );
     }
-    
 }
