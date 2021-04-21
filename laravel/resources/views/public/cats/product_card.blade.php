@@ -41,7 +41,7 @@
                         <div class="product_price top-5">
                             @if(isset($product->price_old) and ($product->price_old > 0) and ($product->is_sale or $product->is_discont))
                             <div class="product_price__old">
-                                {{$product->price_old}}
+                                {{$product->price_old}} руб
                             </div>
                             <div class="product_price__value product_price__value-sale">
                                 <span class="font-s16 font-w500 bottom-10 text-nowrap">
