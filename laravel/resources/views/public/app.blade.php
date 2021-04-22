@@ -211,8 +211,8 @@
                             <div class="headerContacts__phone">
                                 <a
                                         type="tel"
-                                        href="tel:{{ str_replace([" ", "-", "(", ")"], "", getSettings('phone')) }}">
-                                    {{ getSettings('phone') }}
+                                        href="tel:+78122099025">
+                                    +7 (812) 209-90-25
                                 </a>
                             </div>
                             <div class="headerContacts__worktime">
