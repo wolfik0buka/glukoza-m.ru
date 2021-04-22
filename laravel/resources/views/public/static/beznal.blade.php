@@ -29,8 +29,7 @@
                             <div class="col-xs-12 col-sm-4 ptop-10 text-center">
                                 <div class="font-s14 text-muted">Телефон (Санкт-Петербург)</div>
                                 <div class="font-s18 font-w600 text-center">
-                                    <a href="tel:+78122444102">+7 (812) 244-41-02</a> <br>
-                                    <a href="tel:+78122444192">+7 (812) 244-41-92</a> <br>
+                                    <a href="tel:+78122099025">+7 (812) 209-90-25</a> <br>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-4 ptop-10 text-center">
