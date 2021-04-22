@@ -43,7 +43,7 @@
                                     <p>
                                         <strong>Режим работы:</strong> <br> пн-пт: 10:00 до 20:00 <br>сб-вс: 10:00 до 19:00
                                     </p>
-                                    <p><strong>Телефон:</strong> {{ getSettings('phone') }}</p>
+                                    <p><strong>Телефон:</strong> +7 (812) 209-90-25</p>
                                     <p><strong>E-mail:</strong> <a href="mailto:shop@glukoza-med.ru">shop@glukoza-med.ru</a></p>
                                 </div>
                                 <div class="col-sm-6">
@@ -52,9 +52,7 @@
                                     <p>
                                     	<strong>Телефон:</strong>
                                     	<br>
-                                    	+7 (812)244-41-02
-                                    	<br>
-                                    	+7 (812) 244-41-92
+                                    	+7 (812) 209-90-25
                                     </p>
                                     <p>
                                     	<strong>E-mail:</strong><br>
