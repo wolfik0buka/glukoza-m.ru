@@ -53,7 +53,7 @@ module.exports = {
             {
                 id: 5,
                 name: 'Самовывоз из магазина',
-                shop_address: 'м. Озерки, Сикейроса 10к4, ТК «Бульвар», секция 30',
+                shop_address: 'пр. Сизова дом 2, «Простор».',
                 initial_price: 0,
                 is_free: true
             },
