@@ -10,11 +10,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-direction: column;
-        flex-wrap: nowrap;
+        flex-direction: row;
+        flex-wrap: wrap;
         @media (min-width:768px) {
-            flex-direction: row;
             justify-content: space-between;
+            flex-wrap: nowrap;
         }
     }
     .logo{
@@ -23,8 +23,14 @@
         align-items: center;
         justify-content: center;
         flex-wrap: nowrap;
+        flex:none;
+        width:100%;
+        margin-bottom: 5px;
         @media (min-width:768px) {
             justify-content: flex-start;
+            flex:auto;
+            width:auto;
+            margin-bottom: 0;
         }
         a{
             width: 160px;
@@ -126,9 +132,16 @@
     .headerContacts{
         font-family: Arial, sans-serif;
         font-size: 15px;
-        text-align: right;
+        text-align: center;
+        flex: none;
+        width: 100%;
         display: flex;
         flex-direction: column;
+        @media (min-width:768px) {
+            text-align: right;
+            flex: auto;
+            width: auto;
+        }
         &__worktime{
             display: none;
             font-size: 13px;
@@ -141,7 +154,7 @@
         }
         &__phone{
             font-weight: normal;
-            font-size: 15px;
+            font-size: 18px;
             line-height: 100%;
             padding-top: 10px;
             @media (min-width:768px) {
