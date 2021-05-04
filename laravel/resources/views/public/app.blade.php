@@ -194,7 +194,7 @@
                             <div class="logo__slogan">Медицинская техника и&nbsp;товары для&nbsp;контроля&nbsp;диабета</div>
                         </div>
 
-                        <div class="headerSocial hidden-xs hidden-sm">
+                        <div class="headerSocial">
                             <div class="headerSocial__link" onclick="App.openInNewTab('https://vk.com/glukozamed')">
                                 <i class="fa fa-vk"></i>
                             </div>
